@@ -3,6 +3,7 @@ package cli
 import (
 	"context"
 	"flag"
+	"fmt"
 	"os"
 	"strings"
 
@@ -62,6 +63,12 @@ func parseArgs() {
 	flag.BoolVar(&helpFlag, "h", false, "print help information")
 	flag.StringVar(&logLevel, "log-level", "error",
 		"specify the log level ('debug', 'info', 'warn', 'error', 'disabled')")
+
+	flag.Usage = func() {
+		fmt.Println("y4-lang usage:")
+		flag.PrintDefaults()
+	}
+
 	flag.Parse()
 	if helpFlag {
 		flag.Usage()
