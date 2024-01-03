@@ -27,6 +27,11 @@ func AppendNatives(en envir.Environment) {
 	Append(en, nativeLengthFunction, y4Length)
 	Append(en, nativeNowFunction, y4Now)
 	Append(en, nativeSleepFunction, y4Sleep)
+	// HashMap
+	Append(en, NativeNewMapFunction, y4NewMap)
+	Append(en, NativeMapPutFunction, y4MapPut)
+	Append(en, NativeMapGetFunction, y4MapGet)
+	Append(en, NativeMapClearFunction, y4MapClear)
 }
 
 func Append(en envir.Environment, name string, fn interface{}) {

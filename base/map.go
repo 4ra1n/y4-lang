@@ -17,6 +17,13 @@ func NewMap[K comparable, V any]() *Map[K, V] {
 	}
 }
 
+func (m *Map[K, V]) Clear() {
+	m.lock.Lock()
+	defer m.lock.Unlock()
+	m.keys = make([]K, 0)
+	m.values = make(map[K]V)
+}
+
 func (m *Map[K, V]) Set(key K, value V) {
 	m.lock.Lock()
 	defer m.lock.Unlock()
