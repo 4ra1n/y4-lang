@@ -13,6 +13,8 @@ import (
 var (
 	versionFlag bool
 	helpFlag    bool
+	envSize     int
+	poolSize    int
 	filePath    string
 	logLevel    string
 )
@@ -54,8 +56,9 @@ func setLogLevel() {
 
 func parseArgs() {
 	flag.StringVar(&filePath, "f", "", "specify the file path")
+	flag.IntVar(&envSize, "env-size", 0, "set environment size")
+	flag.IntVar(&poolSize, "pool-size", 0, "set threads pool size")
 	flag.BoolVar(&versionFlag, "version", false, "print the version")
-	flag.BoolVar(&versionFlag, "v", false, "print the version")
 	flag.BoolVar(&helpFlag, "h", false, "print help information")
 	flag.StringVar(&logLevel, "log-level", "error",
 		"specify the log level ('debug', 'info', 'warn', 'error', 'disabled')")

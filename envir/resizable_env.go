@@ -1,17 +1,20 @@
 package envir
 
+import "github.com/4ra1n/y4-lang/log"
+
 type ResizableEnv struct {
 	Names *Symbols
 	env   *ArrayEnv
 }
 
-func NewResizableEnv() *ResizableEnv {
-	e := NewArrayEnv(10, nil)
+func NewResizableEnv(size int, poolSize int) *ResizableEnv {
+	e := NewArrayEnv(size, poolSize, nil)
 	n := NewSymbolsNull()
 	r := &ResizableEnv{
 		Names: n,
 		env:   e,
 	}
+	log.Debugf("new env with %d - %d", size, poolSize)
 	return r
 }
 

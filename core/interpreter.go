@@ -12,21 +12,34 @@ import (
 )
 
 type Interpreter struct {
-	lexer  *lexer.Lexer
-	parser *CoreParser
-	cancel context.CancelFunc
+	lexer    *lexer.Lexer
+	parser   *CoreParser
+	cancel   context.CancelFunc
+	envSize  int
+	poolSize int
 }
 
 func NewInterpreter(l *lexer.Lexer, cancel context.CancelFunc) *Interpreter {
 	return &Interpreter{
-		lexer:  l,
-		parser: NewCoreParser(),
-		cancel: cancel,
+		lexer:    l,
+		parser:   NewCoreParser(),
+		cancel:   cancel,
+		envSize:  envir.DefaultEnvSize,
+		poolSize: envir.DefaultPoolSize,
 	}
 }
 
+func (i *Interpreter) SetEnvSize(size int) {
+	i.envSize = size
+}
+
+func (i *Interpreter) SetPoolSize(size int) {
+	i.poolSize = size
+}
+
 func (i *Interpreter) Start() {
-	en := native.NewNative(envir.NewResizableEnv()).Environment()
+	env := envir.NewResizableEnv(i.envSize, i.poolSize)
+	en := native.NewNative(env).Environment()
 	for {
 		v, err := i.lexer.Peek(0)
 		if err != nil {

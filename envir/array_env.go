@@ -11,11 +11,14 @@ type ArrayEnv struct {
 	GoPool *pool.Pool
 }
 
-func NewArrayEnv(size int, out Environment) *ArrayEnv {
+func NewArrayEnv(size int, poolSize int, out Environment) *ArrayEnv {
+	if poolSize == 0 {
+		poolSize = DefaultPoolSize
+	}
 	a := &ArrayEnv{
 		Values: make([]interface{}, size),
 		Outer:  out,
-		GoPool: pool.NewPool(10),
+		GoPool: pool.NewPool(poolSize),
 	}
 	return a
 }

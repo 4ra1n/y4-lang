@@ -28,5 +28,5 @@ func (o *OptFunction) Body() *BlockStmt {
 }
 
 func (o *OptFunction) MakeEnv() envir.Environment {
-	return envir.NewArrayEnv(o.size, o.fun.en)
+	return envir.NewArrayEnv(o.size, 0, o.fun.en)
 }

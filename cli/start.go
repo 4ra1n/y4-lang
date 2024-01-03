@@ -51,6 +51,17 @@ func start(cancel context.CancelFunc) {
 	l := lexer.NewLexer(newReader)
 	// new interpreter
 	i := core.NewInterpreter(l, cancel)
+
+	if envSize != 0 {
+		log.Debugf("set env size %d", envSize)
+		i.SetEnvSize(envSize)
+	}
+
+	if poolSize != 0 {
+		log.Debugf("set pool size %d", poolSize)
+		i.SetPoolSize(poolSize)
+	}
+
 	// start
 	i.Start()
 }
