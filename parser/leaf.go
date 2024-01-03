@@ -48,7 +48,7 @@ func (l *Leaf) Parse(lex *lexer.Lexer, res *base.List[ast.ASTree]) error {
 func (l *Leaf) Match(lex *lexer.Lexer) bool {
 	t, err := lex.Peek(0)
 	if err != nil {
-		log.Error(err)
+		log.Debug(err)
 		return false
 	}
 	if t.IsIdentifier() {
