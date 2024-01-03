@@ -21,6 +21,6 @@ print(test(a,b,c));
 `
 	log.SetLevel(log.DebugLevel)
 	r := bytes.NewReader([]byte(code))
-	i := NewInterpreter(lexer.NewLexer(r))
+	i := NewInterpreter(lexer.NewLexer(r), nil)
 	i.Start()
 }

@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"context"
 	"os"
 	"strings"
 
@@ -10,7 +11,7 @@ import (
 	"github.com/4ra1n/y4-lang/pre"
 )
 
-func start() {
+func start(cancel context.CancelFunc) {
 	log.Debug("start y4-lang")
 
 	// check nil
@@ -21,7 +22,7 @@ func start() {
 	}
 
 	// check extension name
-	if strings.HasSuffix(strings.ToLower(filePath), ".y4") {
+	if !strings.HasSuffix(strings.ToLower(filePath), ".y4") {
 		log.Errorf("file extension must be y4")
 		return
 	}
@@ -49,7 +50,7 @@ func start() {
 	// new lexer
 	l := lexer.NewLexer(newReader)
 	// new interpreter
-	i := core.NewInterpreter(l)
+	i := core.NewInterpreter(l, cancel)
 	// start
 	i.Start()
 }

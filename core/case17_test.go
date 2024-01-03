@@ -25,7 +25,7 @@ print(arr[2]);
 	// new lexer
 	l := lexer.NewLexer(newReader)
 	// new interpreter
-	i := NewInterpreter(l)
+	i := NewInterpreter(l, nil)
 	// start
 	i.Start()
 

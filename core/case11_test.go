@@ -15,6 +15,6 @@ print(0.11+0.222+0.333+0.4444);
 `
 	log.SetLevel(log.DebugLevel)
 	r := bytes.NewReader([]byte(code))
-	i := NewInterpreter(lexer.NewLexer(r))
+	i := NewInterpreter(lexer.NewLexer(r), nil)
 	i.Start()
 }

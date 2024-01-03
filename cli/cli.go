@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"context"
 	"flag"
 	"os"
 	"strings"
@@ -21,10 +22,10 @@ const (
 	ErrFlag     = 0
 )
 
-func Start() {
+func Start(cancel context.CancelFunc) {
 	parseArgs()
 	setLogLevel()
-	start()
+	start(cancel)
 }
 
 func setLogLevel() {

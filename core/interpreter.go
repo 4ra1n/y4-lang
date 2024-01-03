@@ -1,6 +1,8 @@
 package core
 
 import (
+	"context"
+
 	"github.com/4ra1n/y4-lang/ast"
 	"github.com/4ra1n/y4-lang/envir"
 	"github.com/4ra1n/y4-lang/lexer"
@@ -12,12 +14,14 @@ import (
 type Interpreter struct {
 	lexer  *lexer.Lexer
 	parser *CoreParser
+	cancel context.CancelFunc
 }
 
-func NewInterpreter(l *lexer.Lexer) *Interpreter {
+func NewInterpreter(l *lexer.Lexer, cancel context.CancelFunc) *Interpreter {
 	return &Interpreter{
 		lexer:  l,
 		parser: NewCoreParser(),
+		cancel: cancel,
 	}
 }
 
@@ -79,5 +83,10 @@ func (i *Interpreter) Start() {
 	ok := en.WaitJob()
 	if ok {
 		log.Info("all threads finish")
+	}
+	if i.cancel != nil {
+		i.cancel()
+	} else {
+		log.Info("test finish")
 	}
 }

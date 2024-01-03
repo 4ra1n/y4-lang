@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"os/signal"
@@ -24,13 +25,24 @@ func main() {
 	if !color.IsSupported() {
 		color.DisableColor()
 	}
+
 	// PRINT LOGO
 	cli.PrintLogo()
+	ctx, cancel := context.WithCancel(context.Background())
+
 	// START
-	go cli.Start()
-	// WAIT
+	go cli.Start(cancel)
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
-	<-sigChan
-	fmt.Println("stop")
+
+	for {
+		select {
+		case <-sigChan:
+			fmt.Println("ctrl+c stop")
+			return
+		case <-ctx.Done():
+			fmt.Println("y4-lang run finish")
+			return
+		}
+	}
 }

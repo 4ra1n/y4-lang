@@ -32,7 +32,7 @@ testOthers(a);
 
 	l := lexer.NewLexer(data)
 	// new interpreter
-	i := core.NewInterpreter(l)
+	i := core.NewInterpreter(l, nil)
 	// start
 	i.Start()
 }
