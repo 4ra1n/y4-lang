@@ -1,0 +1,81 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: y4-lang
+
+on:
+
+  push:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+
+jobs:
+
+  check:
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
+    - name: go test all
+      run: |
+        set -x
+        go test ./...
+
+    - name: check gox
+      run: |
+        set -x
+        cd gox
+        go build -o test
+
+    - name: check y4lang
+      run: |
+        set -x
+        cd cmd
+        go build -o test
+        
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+
+    steps:
+
+    - name: set version
+      run: echo "VERSION=v0.0.1" >> $GITHUB_ENV
+
+    - uses: actions/checkout@v3
+    
+    - name: set up go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
+    - name: build gox
+      run: |
+        set -x
+        cd gox
+        go build -o ../cmd/my-gox
+      
+    - name: build y4-lang
+      run: |
+        set -x 
+        cd cmd
+        mkdir y4
+        ./my-gox -parallel 5 -osarch="darwin/arm64 darwin/amd64 linux/386 linux/amd64 linux/arm linux/arm64 windows/arm windows/arm64 windows/386 windows/amd64" -ldflags="-extldflags=-static -s -w" -output="y4/y4lang_{{.OS}}_{{.Arch}}_${{ env.VERSION }}"
+        sudo apt-get install -y zip unzip
+        zip -r ../build.zip y4/*
+        
+    - name: upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifact
+        path: build.zip
