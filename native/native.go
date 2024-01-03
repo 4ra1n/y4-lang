@@ -28,10 +28,15 @@ func AppendNatives(en envir.Environment) {
 	Append(en, nativeNowFunction, y4Now)
 	Append(en, nativeSleepFunction, y4Sleep)
 	// HashMap
-	Append(en, NativeNewMapFunction, y4NewMap)
-	Append(en, NativeMapPutFunction, y4MapPut)
-	Append(en, NativeMapGetFunction, y4MapGet)
-	Append(en, NativeMapClearFunction, y4MapClear)
+	Append(en, nativeNewMapFunction, y4NewMap)
+	Append(en, nativeMapPutFunction, y4MapPut)
+	Append(en, nativeMapGetFunction, y4MapGet)
+	Append(en, nativeMapClearFunction, y4MapClear)
+	// File
+	Append(en, nativeExistFileFunction, y4ExistFile)
+	Append(en, nativeReadFileFunction, y4ReadFile)
+	Append(en, nativeWriteFileFunction, y4WriteFile)
+	Append(en, nativeDeleteFileFunction, y4DeleteFile)
 }
 
 func Append(en envir.Environment, name string, fn interface{}) {

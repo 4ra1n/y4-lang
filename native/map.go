@@ -3,10 +3,10 @@ package native
 import "github.com/4ra1n/y4-lang/base"
 
 const (
-	NativeNewMapFunction   = "newMap"
-	NativeMapPutFunction   = "mapPut"
-	NativeMapGetFunction   = "mapGet"
-	NativeMapClearFunction = "mapClear"
+	nativeNewMapFunction   = "newMap"
+	nativeMapPutFunction   = "mapPut"
+	nativeMapGetFunction   = "mapGet"
+	nativeMapClearFunction = "mapClear"
 )
 
 func y4NewMap() *base.Map[string, interface{}] {
