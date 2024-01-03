@@ -25,6 +25,8 @@ func AppendNatives(en envir.Environment) {
 	Append(en, nativeTypeFunction, y4Type)
 	Append(en, nativeTrimFunction, y4Trim)
 	Append(en, nativeLengthFunction, y4Length)
+	Append(en, nativeNowFunction, y4Now)
+	Append(en, nativeSleepFunction, y4Sleep)
 }
 
 func Append(en envir.Environment, name string, fn interface{}) {
