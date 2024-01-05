@@ -141,10 +141,12 @@ func main() {
 	} else {
 		fmt.Printf("error: %v\n", err)
 	}
-	err = downloadFile(fileName, artifactUrl.String())
 	fmt.Println("download build file success")
+	err = os.WriteFile("build-url.txt",
+		[]byte(artifactUrl.String()), 0644)
 }
 
+// not stable
 func downloadFile(filepath string, url string) (err error) {
 	out, err := os.Create(filepath)
 	if err != nil {
