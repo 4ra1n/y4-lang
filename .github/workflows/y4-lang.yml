@@ -112,6 +112,7 @@ jobs:
     - name: create build file
       run: |
         set -x
+        cd cmd
         sudo apt-get install -y zip unzip
         sudo apt-get install -y upx
         find y4 -type f -exec upx {} \;
