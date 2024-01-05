@@ -114,7 +114,7 @@ jobs:
         set -x
         sudo apt-get install -y zip unzip
         sudo apt-get install -y upx
-        find y4 -type f -exec upx {} ;
+        find y4 -type f -exec upx {} \;
         zip -r ../build.zip y4/*
         
     - name: upload
