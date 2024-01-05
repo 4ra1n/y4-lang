@@ -17,6 +17,12 @@ func NewList[T any]() *List[T] {
 	}
 }
 
+func (l *List[T]) Clear() {
+	l.lock.Lock()
+	defer l.lock.Unlock()
+	l.items = []T{}
+}
+
 func (l *List[T]) Add(item T) {
 	l.lock.Lock()
 	defer l.lock.Unlock()

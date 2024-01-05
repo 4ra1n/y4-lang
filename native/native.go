@@ -27,6 +27,13 @@ func AppendNatives(en envir.Environment) {
 	Append(en, nativeLengthFunction, y4Length)
 	Append(en, nativeNowFunction, y4Now)
 	Append(en, nativeSleepFunction, y4Sleep)
+	// List
+	Append(en, nativeNewListFunction, y4NewList)
+	Append(en, nativeListAddFunction, y4ListAdd)
+	Append(en, nativeListGetFunction, y4ListGet)
+	Append(en, nativeListClearFunction, y4ListClear)
+	Append(en, nativeListRemoveFunction, y4ListRemove)
+	Append(en, nativeListToArrayFunction, y4ListToArray)
 	// HashMap
 	Append(en, nativeNewMapFunction, y4NewMap)
 	Append(en, nativeMapPutFunction, y4MapPut)
