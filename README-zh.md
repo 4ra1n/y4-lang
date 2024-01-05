@@ -27,7 +27,7 @@ hello(array[0], b);
 ```
 
 主要特性：
-- 从零实现词法分析，语法分析，遍历 `AST` 解释执行的过程
+- 不使用任何库从零实现词法分析，语法分析，解释执行
 - 类型包含 `int/float/bool/string` 和 `object`
 - 支持 `if/else/while/continue/break` 等基本语法
 - 支持数组类型以及 `list` 和 `map` 等高级结构

@@ -12,6 +12,28 @@ on:
 
 jobs:
 
+  docker:
+
+    name: docker-test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: set up docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: docker build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: y4lang:latest
+
   scan:
 
     name: git-leaks
