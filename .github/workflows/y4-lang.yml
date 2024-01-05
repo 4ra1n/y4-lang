@@ -114,14 +114,7 @@ jobs:
         set -x
         sudo apt-get install -y zip unzip
         sudo apt-get install -y upx
-        
-        for file in y4/*; do
-          if [ -f "$file" ]; then
-            echo "compressing: $file"
-            upx "$file"
-          fi
-        done
-        
+        find y4 -type f -exec upx {} ;
         zip -r ../build.zip y4/*
         
     - name: upload
