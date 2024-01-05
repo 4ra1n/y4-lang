@@ -2,10 +2,7 @@ FROM golang:1.21.5
 
 WORKDIR /app
 
-RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list && \
-    sed -i 's/security.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
-
-RUN apt-get update && apt-get install -y zip unzip upx
+RUN apt-get update && apt-get install -y zip unzip
 
 COPY . .
 
@@ -17,7 +14,6 @@ RUN cd gox && \
 RUN cd cmd && \
     mkdir y4 && \
     ./my-gox -parallel 5 -osarch="darwin/arm64 darwin/amd64 linux/386 linux/amd64 linux/arm linux/arm64 windows/arm windows/arm64 windows/386 windows/amd64" -ldflags="-extldflags=-static -s -w" -output="y4/y4lang_{{.OS}}_{{.Arch}}_$VERSION" && \
-    find y4 -type f -exec upx {} \; && \
     zip -r ../build.zip y4/*
 
 CMD ["echo", "build completed - /app/build.zip"]
