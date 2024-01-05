@@ -2,6 +2,9 @@ FROM golang:1.21.5
 
 WORKDIR /app
 
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list && \
+    sed -i 's/security.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
+
 RUN apt-get update && apt-get install -y zip unzip upx
 
 COPY . .
