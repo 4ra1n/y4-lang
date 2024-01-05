@@ -16,6 +16,10 @@ func y4Length(v interface{}) int {
 	if isA {
 		return len(a)
 	}
+	as, isAs := v.([]string)
+	if isAs {
+		return len(as)
+	}
 	m, isM := v.(*base.Map[string, interface{}])
 	if isM {
 		return m.Length()
