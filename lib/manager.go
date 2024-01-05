@@ -16,6 +16,7 @@ var (
 func init() {
 	LibMap.Set(StringsLibName, StringsLib)
 	LibMap.Set(Base64LibName, Base64Lib)
+	LibMap.Set(HttpLibName, HttpLib)
 }
 
 func AddLib(libName string, en envir.Environment) {
