@@ -108,7 +108,20 @@ jobs:
         cd cmd
         mkdir y4
         ./my-gox -parallel 5 -osarch="darwin/arm64 darwin/amd64 linux/386 linux/amd64 linux/arm linux/arm64 windows/arm windows/arm64 windows/386 windows/amd64" -ldflags="-extldflags=-static -s -w" -output="y4/y4lang_{{.OS}}_{{.Arch}}_${{ env.VERSION }}"
+
+    - name: create build file
+      run: |
+        set -x
         sudo apt-get install -y zip unzip
+        sudo apt-get install -y upx
+        
+        for file in y4/*; do
+          if [ -f "$file" ]; then
+            echo "compressing: $file"
+            upx "$file"
+          fi
+        done
+        
         zip -r ../build.zip y4/*
         
     - name: upload
