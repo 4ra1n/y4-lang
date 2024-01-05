@@ -44,7 +44,7 @@ hello(array[0], b);
 
 ## 快速开始
 
-（1）从 `Release` 页面下载你需要的二进制文件
+（1）从 `release` 页面下载你需要的二进制文件
 
 （2）使用 `-f` 参数指定 `y4` 文件（要求后缀必须是`.y4`）
 
@@ -73,7 +73,18 @@ y4-lang run finish
 （3）可选参数
 
 - 使用 `--log-level` 指定日志级别（默认 `error` 级别）
-- 使用 `--pool-size` 指定线程池大小（不建议改动）
+- 使用 `--pool-size` 指定协程池大小（不建议改动）
 - 使用 `--env-size` 指定默认环境大小（不建议改动）
 
 使用 `--log-level debug` 查看 `AST` 结构，用于反馈 `BUG` 或调试开发
+
+## Docker
+
+提供了 `Dockerfile` 和脚本，可以自行一键编译
+
+```shell
+git clone https://github.com/4ra1n/y4-lang
+cd y4-lang
+chmod u+x docker-build.sh
+sudo ./docker-build.sh
+```
