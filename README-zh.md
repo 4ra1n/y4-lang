@@ -6,4 +6,4 @@
 ![](https://img.shields.io/github/actions/workflow/status/4ra1n/y4-lang/y4-lang.yml?branch=master)
 ![](https://img.shields.io/badge/Code%20Lines-7929-blue)
 
-[中文版本 - Chinese Version](README-zh.md)
+[英文版本 - English Version](README.md)
