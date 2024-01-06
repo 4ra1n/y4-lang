@@ -1,0 +1,32 @@
+// helper function to check if an element is in an array
+def is_in_array(arr, element) {
+    for i=0; i<length(arr); i=i+1 {
+        item = arr[i];
+        if item == element {
+            return true;
+        }
+    }
+    return false;
+}
+
+// function unique
+// This function removes duplicates from an array
+// parameters:
+// arr: the original array
+// returns: a new array with unique elements
+def unique(arr) {
+    result = [];
+    for i=0; i<length(arr); i=i+1 {
+        element = arr[i];
+        if !is_in_array(result, element) {
+            result = append(result, element);
+        }
+    }
+    return result;
+}
+
+
+// test the function
+arr = [1, 2, 2, 3, 4, 4, 5, 5, 5, 1, 2, 1111, 2222, 111, 1111];
+unique_arr = unique(arr);
+print("unique array:" + unique_arr);
