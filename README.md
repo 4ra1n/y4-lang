@@ -8,6 +8,8 @@
 
 [英文版本 - English Version](README-en.md)
 
+[更新日志 - Change Log](CHANGELOG.md)
+
 `Y4-Lang` 是一个基于 `Golang` 的编程语言（解释型脚本语言）
 
 不使用任何第三方库，仅依赖 `Golang` 标准库实现，语法类似 `Python` 简单易用
@@ -56,19 +58,7 @@ hello(array[0], b);
 
 输出
 
-```text
-__  ____ __        __
-\ \/ / // /       / /  ____ _____  ____ _
- \  / // /_______/ /  / __ `/ __ \/ __ `/
- / /__  __/_____/ /__/ /_/ / / / / /_/ /
-/_/  /_/       /_____|__,_/_/ /_/\__, /
-                                /____/
-y4-lang v0.0.1
-y4-lang is a script language based on golang
-project: https://github.com/4ra1n/y4-lang
-hello world
-y4-lang run finish
-```
+![](img/001.png)
 
 （3）可选参数
 
@@ -88,3 +78,11 @@ cd y4-lang
 chmod u+x docker-build.sh
 sudo ./docker-build.sh
 ```
+
+## VSCode 插件
+
+支持语法高亮，一键启动，正在开发中
+
+## 示例
+
+- [冒泡排序实现](examples/001.y4)

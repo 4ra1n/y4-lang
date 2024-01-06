@@ -1,7 +1,7 @@
 package lexer
 
 func isLetter(c rune) bool {
-	return ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') || isDot(c)
+	return ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') || isDot(c) || c == '_'
 }
 
 func isDigit(c rune) bool {

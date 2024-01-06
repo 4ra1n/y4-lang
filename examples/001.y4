@@ -1,0 +1,25 @@
+// Y4-Lang Example
+// Author: 4ra1n
+// Bubble Sort
+
+def bubble_sort(arr) {
+    len = length(arr);
+    index = 0;
+    swapped = True
+    while index < len  {
+        new_index = 0;
+        while new_index <
+    }
+}
+
+def print_arr(arr) {
+    len = length(arr);
+    index = 0;
+    while index < len {
+        print(arr[index]);
+        index = index + 1;
+    }
+}
+
+test_arr = [1, 3, 2, 4, 666, 50];
+result = bubble_sort(test_arr);

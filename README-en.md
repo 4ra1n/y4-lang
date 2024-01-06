@@ -7,3 +7,5 @@
 ![](https://img.shields.io/badge/Code%20Lines-7929-blue)
 
 [中文版本 - Chinese Version](README.md)
+
+[更新日志 - Change Log](CHANGELOG.md)
