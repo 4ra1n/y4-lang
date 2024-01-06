@@ -10,12 +10,8 @@ import (
 
 func TestCase01(t *testing.T) {
 	code := `
-a=-1;
-b=2;
-c=a+b;
-print(a+b);
-print(c);
-print(-a+b);
+a=[[1,2,3],[1,2]]
+print(a[0][1])
 `
 	log.SetLevel(log.DebugLevel)
 	r := bytes.NewReader([]byte(code))

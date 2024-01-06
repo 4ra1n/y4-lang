@@ -41,10 +41,10 @@ func (a *ArrayRef) Eval(env envir.Environment) (interface{}, error) {
 	return nil, nil
 }
 
-func (p *ArrayRef) Eval0(env envir.Environment, value interface{}) (interface{}, error) {
+func (a *ArrayRef) Eval0(env envir.Environment, value interface{}) (interface{}, error) {
 	valReflectValue := reflect.ValueOf(value)
 	if valReflectValue.Kind() == reflect.Slice {
-		pi, err := p.Index()
+		pi, err := a.Index()
 		if err != nil {
 			return nil, err
 		}

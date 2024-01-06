@@ -44,6 +44,14 @@ func (a *ArrayLiteral) Eval(env envir.Environment) (interface{}, error) {
 	res := make([]interface{}, s)
 	i := 0
 	for _, t := range a.astList.Children().Items() {
+		if t.NumChildren() == 3 {
+			var err error
+			t, err = t.Child(1)
+			if err != nil {
+				log.Error(err)
+				return nil, err
+			}
+		}
 		o, err := t.Eval(env)
 		if err != nil {
 			log.Error(err)
