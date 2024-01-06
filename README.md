@@ -89,3 +89,4 @@ sudo ./docker-build.sh
 - [快速排序 (Quick Sort) 实现](examples/002.y4)
 - [递归实现的二分查找](examples/003.y4)
 - [非递归实现的二分查找](examples/004.y4)
+- [动态规划解决最长公共子序列 (LCS) 问题](examples/005.y4)

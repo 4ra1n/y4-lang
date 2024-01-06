@@ -93,6 +93,16 @@ func (a *Arguments) Eval0(en envir.Environment, value interface{}) (interface{},
 		num := 0
 		var err error
 		for _, item := range a.Children().Items() {
+			if item.NumChildren() == 3 {
+				t, err := item.Child(1)
+				if err != nil {
+					return nil, err
+				}
+				_, tA := t.(*ArrayLiteral)
+				if tA {
+					item = t
+				}
+			}
 			args[num], err = item.Eval(en)
 			num++
 			if err != nil {
