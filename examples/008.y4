@@ -1,0 +1,103 @@
+// helper function to create a 2d array
+def make_array(rows, cols) {
+    arr = [];
+    for i=0; i<rows; i=i+1 {
+        row = [];
+        for j=0; j<cols; j=j+1 {
+            row = append(row, false);
+        }
+        arr = append(arr, row);
+    }
+    return arr;
+}
+
+// function is_safe
+// this function checks if a queen can be placed on board[row][col] without conflicts
+// parameters:
+// board: current state of the chess board
+// row: row index
+// col: column index
+// returns: true if safe, false otherwise
+def is_safe(board, row, col) {
+    // check this row on left side
+    for i=0; i<col; i=i+1 {
+        if board[row][i] {
+            return false;
+        }
+    }
+    // check upper diagonal on left side
+    i = row;
+    j = col;
+    while i >= 0 {
+        if j >= 0 {
+            if board[i][j] {
+                return false;
+            }
+        } else {
+            break;
+        }
+        i = i - 1;
+        j = j - 1;
+    }
+    // check lower diagonal on left side
+    i = row;
+    j = col;
+    while i < 8 {
+        if j >= 0 {
+            if board[i][j] {
+                return false;
+            }
+        } else {
+            break;
+        }
+        i = i + 1;
+        j = j - 1;
+    }
+    return true;
+}
+
+// function solve_n_queens_util
+// this function uses backtracking to solve the n queens problem
+// parameters:
+// board: current state of the chess board
+// col: column index
+// returns: true if a solution is found, false otherwise
+def solve_n_queens_util(board, col) {
+    // if all queens are placed then return true
+    if col >= 8 {
+        return true;
+    }
+    // try placing this queen in all rows one by one
+    for i=0; i<8; i=i+1 {
+        if is_safe(board, i, col) {
+            // place this queen in board[i][col]
+            board[i][col] = true;
+            // recur to place rest of the queens
+            if solve_n_queens_util(board, col + 1) {
+                return true;
+            }
+            // if placing queen in board[i][col] doesn't lead to a solution then
+            // remove queen from board[i][col]
+            board[i][col] = false;
+        }
+    }
+    // if the queen cannot be placed in any row in this column then return false
+    return false;
+}
+
+// function solve_n_queens
+// this function solves the n queens problem using backtracking
+// returns: solution as a chess board with queens placed
+def solve_n_queens() {
+    board = make_array(8, 8);
+    if solve_n_queens_util(board, 0) {
+        return board;
+    } else {
+        return "no solution";
+    }
+}
+
+// test the function
+solution = solve_n_queens();
+print("N-Queens Solution:");
+print(solution);

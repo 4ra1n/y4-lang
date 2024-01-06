@@ -91,3 +91,5 @@ sudo ./docker-build.sh
 - [非递归实现的二分查找](examples/004.y4)
 - [动态规划解决最长公共子序列 (LCS) 问题](examples/005.y4)
 - [数组去重问题的实现](examples/006.y4)
+- [接雨水问题的实现](examples/007.y4)
+- [八皇后问题的实现](examples/008.y4)
