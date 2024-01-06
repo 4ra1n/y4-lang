@@ -89,6 +89,8 @@ func makeAstList(typ string, list *base.List[ast.ASTree]) ast.ASTree {
 			return nil
 		}
 		return ast.NewIfStmt(newList)
+	case "for_stmt":
+		return ast.NewForStmt(list)
 	case "while_stmt":
 		newList, err := parseWhileStmt(list)
 		if err != nil {
