@@ -43,7 +43,13 @@ func (b *BlockStmt) Eval(env envir.Environment) (interface{}, error) {
 	for _, a := range b.Children().Items() {
 		_, isRt := a.(*ReturnStmt)
 		if isRt {
-			return a.Eval(env)
+			v, err := a.Eval(env)
+			if err != nil {
+				return nil, err
+			}
+			return &ReturnSignal{
+				Val: v,
+			}, nil
 		}
 		_, isNull := a.(*NullStmt)
 		if !isNull {
@@ -51,6 +57,10 @@ func (b *BlockStmt) Eval(env envir.Environment) (interface{}, error) {
 			result, err = a.Eval(env)
 			if err != nil {
 				return nil, err
+			}
+			rs, isRs := result.(*ReturnSignal)
+			if isRs {
+				return rs, nil
 			}
 			br, isBr := result.(*BreakSignal)
 			if isBr {

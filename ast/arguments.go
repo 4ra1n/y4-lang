@@ -70,7 +70,19 @@ func (a *Arguments) Eval0(en envir.Environment, value interface{}) (interface{},
 			params.Eval0(newEnv, num, res)
 			num++
 		}
-		return bf.Body().Eval(newEnv)
+		v, err := bf.Body().Eval(newEnv)
+		if err != nil {
+			return nil, err
+		}
+		if v == nil {
+			return nil, nil
+		}
+		vr, isR := v.(*ReturnSignal)
+		if isR {
+			return vr.Val, nil
+		} else {
+			return v, nil
+		}
 	} else {
 		paramsLen := nf.GetNumParam()
 		if a.Size() != paramsLen {

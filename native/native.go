@@ -44,6 +44,8 @@ func AppendNatives(en envir.Environment) {
 	Append(en, nativeReadFileFunction, y4ReadFile)
 	Append(en, nativeWriteFileFunction, y4WriteFile)
 	Append(en, nativeDeleteFileFunction, y4DeleteFile)
+	// Convert
+	Append(en, nativeIntFunction, y4Int)
 }
 
 func Append(en envir.Environment, name string, fn interface{}) {

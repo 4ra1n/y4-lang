@@ -26,6 +26,6 @@ def binary_search_recursive(arr, low, high, target) {
 }
 
 arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21];
-target = 7;
+target = 13;
 index_recursive := binary_search_recursive(arr, 0, length(arr) - 1, target);
 print(index_recursive);

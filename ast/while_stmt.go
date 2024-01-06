@@ -70,6 +70,10 @@ func (w *WhileStmt) Eval(en envir.Environment) (interface{}, error) {
 				log.Error(err)
 				return nil, err
 			}
+			rs, isRR := result.(*ReturnSignal)
+			if isRR {
+				return rs, nil
+			}
 			_, isBr := result.(*BreakSignal)
 			if isBr {
 				break
