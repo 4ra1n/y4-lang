@@ -85,4 +85,5 @@ sudo ./docker-build.sh
 
 ## 示例
 
-- [冒泡排序实现](examples/001.y4)
+- [冒泡排序 (Bubble Sort) 实现](examples/001.y4)
+- [快速排序 (Quick Sort) 实现](examples/002.y4)
