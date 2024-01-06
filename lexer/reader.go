@@ -139,6 +139,9 @@ func (l *Lexer) read0() (token.Token, error) {
 			}
 			l.lineNumber++
 			return token.NewCommentToken(l.lineNumber-1, buf.String()), nil
+		} else {
+			l.unGetChar(c)
+			return token.NewIdentifierToken(l.lineNumber, "/"), nil
 		}
 	} else if isDigit(c) {
 		buf.WriteRune(c)

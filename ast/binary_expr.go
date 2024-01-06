@@ -93,6 +93,17 @@ func (b *BinaryExpr) Eval(env envir.Environment) (interface{}, error) {
 		if err != nil {
 			return nil, err
 		}
+		// c = (a+b) / 2
+		if l.NumChildren() == 3 {
+			lt, err := l.Child(1)
+			if err != nil {
+				return nil, err
+			}
+			lt, isBinary := lt.(*BinaryExpr)
+			if isBinary {
+				l = lt
+			}
+		}
 		lv, err := l.Eval(env)
 		if err != nil {
 			return nil, err
@@ -100,6 +111,17 @@ func (b *BinaryExpr) Eval(env envir.Environment) (interface{}, error) {
 		r, err := b.right()
 		if err != nil {
 			return nil, err
+		}
+		// c = 50 / (a+b)
+		if r.NumChildren() == 3 {
+			rt, err := r.Child(1)
+			if err != nil {
+				return nil, err
+			}
+			rt, isBinary := rt.(*BinaryExpr)
+			if isBinary {
+				r = rt
+			}
 		}
 		rv, err := r.Eval(env)
 		if err != nil {

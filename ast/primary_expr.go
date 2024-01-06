@@ -66,6 +66,7 @@ func (p *PrimaryExpr) Postfix(nest int) Postfix {
 	}
 	b, err := a.Child(1)
 	if err != nil {
+		log.Error(err)
 		return nil
 	}
 	po, ok := b.(Postfix)

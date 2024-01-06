@@ -87,3 +87,5 @@ sudo ./docker-build.sh
 
 - [冒泡排序 (Bubble Sort) 实现](examples/001.y4)
 - [快速排序 (Quick Sort) 实现](examples/002.y4)
+- [递归实现的二分查找](examples/003.y4)
+- [非递归实现的二分查找](examples/004.y4)
