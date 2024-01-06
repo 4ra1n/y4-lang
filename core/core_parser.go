@@ -51,8 +51,11 @@ var (
 		parser.RuleWithType("if_stmt").Sep("if").Ast(expr).Ast(block).Option(
 			parser.RuleNoType().Sep("else").Ast(block)),
 		parser.RuleWithType("while_stmt").Sep("while").Ast(expr).Ast(block),
-		parser.RuleWithType("for_stmt").Sep("for").Ast(expr).
-			Sep(";").Ast(expr).Sep(";").Maybe(expr).Ast(block),
+		parser.RuleWithType("for_stmt").Sep("for").
+			Ast(expr).Sep(";"). // init
+			Ast(expr).Sep(";"). // condition
+			Ast(expr).          // iteration
+			Ast(block),
 		parser.RuleWithType("return_stmt").Sep("return").Ast(expr),
 		parser.RuleWithType("y4_stmt").Sep("y4").Ast(factor),
 		continueStmt,
