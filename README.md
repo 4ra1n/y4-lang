@@ -15,17 +15,24 @@
 不使用任何第三方库，仅依赖 `Golang` 标准库实现，语法类似 `Python` 简单易用
 
 ```python
-def hello(a, b) {
-    if a < b {
-        print("hello world");
-    } else {
-        print("error");    
+// function bubble_sort
+def bubble_sort(arr) {
+    len = length(arr);
+    for i=0; i<len-1; i=i+1 {
+        for j=1; j<len-i; j=j+1 {
+            if arr[j-1] > arr[j] {
+                temp = arr[j-1];
+                arr[j-1] = arr[j];
+                arr[j] = temp;
+            }
+        }
     }
 }
 
-array = [1, 2, 3];
-b = 2;
-hello(array[0], b);
+// test code
+test_arr = [1, 3, 2, 4, 666, 50];
+bubble_sort(test_arr);
+print(test_arr);
 ```
 
 主要特性：
@@ -50,7 +57,7 @@ hello(array[0], b);
 
 （2）使用 `-f` 参数指定 `y4` 文件（要求后缀必须是`.y4`）
 
-将 `README` 开头部分代码保存到 `test.y4` 并输入
+将 `print("hello wolrd");` 保存到 `test.y4` 并输入
 
 ```shell
 ./y4lang -f test.y4
@@ -68,6 +75,17 @@ hello(array[0], b);
 
 使用 `--log-level debug` 查看 `AST` 结构，用于反馈 `BUG` 或调试开发
 
+## 示例
+
+- [冒泡排序 (Bubble Sort) 实现](examples/001.y4)
+- [快速排序 (Quick Sort) 实现](examples/002.y4)
+- [递归实现的二分查找](examples/003.y4)
+- [非递归实现的二分查找](examples/004.y4)
+- [动态规划解决最长公共子序列 (LCS) 问题](examples/005.y4)
+- [数组去重问题的实现](examples/006.y4)
+- [接雨水问题的实现](examples/007.y4)
+- [回溯算法解决八皇后问题](examples/008.y4)
+
 ## Docker
 
 提供了 `Dockerfile` 和脚本，可以自行一键编译
@@ -82,14 +100,3 @@ sudo ./docker-build.sh
 ## VSCode 插件
 
 支持语法高亮，一键启动，正在开发中
-
-## 示例
-
-- [冒泡排序 (Bubble Sort) 实现](examples/001.y4)
-- [快速排序 (Quick Sort) 实现](examples/002.y4)
-- [递归实现的二分查找](examples/003.y4)
-- [非递归实现的二分查找](examples/004.y4)
-- [动态规划解决最长公共子序列 (LCS) 问题](examples/005.y4)
-- [数组去重问题的实现](examples/006.y4)
-- [接雨水问题的实现](examples/007.y4)
-- [回溯算法解决八皇后问题](examples/008.y4)
