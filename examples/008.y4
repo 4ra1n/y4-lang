@@ -99,5 +99,5 @@ def solve_n_queens() {
 
 // test the function
 solution = solve_n_queens();
-print("N-Queens Solution:");
+print("N-Queens Solution: ");
 print(solution);

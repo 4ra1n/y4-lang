@@ -29,4 +29,4 @@ def unique(arr) {
 // test the function
 arr = [1, 2, 2, 3, 4, 4, 5, 5, 5, 1, 2, 1111, 2222, 111, 1111];
 unique_arr = unique(arr);
-print("unique array:" + unique_arr);
+print("unique array: " + unique_arr);
