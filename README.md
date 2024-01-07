@@ -14,6 +14,17 @@
 
 不使用任何第三方库，仅依赖 `Golang` 标准库实现，语法类似 `Python` 简单易用
 
+主要特性：
+- 不使用任何库从零实现词法分析，语法分析，解释执行
+- 类型包含 `int/float/bool/string` 和 `object`
+- 支持 `if/else/while/continue/break` 等基本语法
+- 支持数组类型以及 `list` 和 `map` 等高级结构
+- 支持通过 `#include` 语法导入多个脚本文件执行
+- 支持通过 `def` 语法定义函数和执行
+- 支持 `http` 和 `base64` 等常见的库（可扩展）
+
+一个简单的冒泡排序
+
 ```python
 // function bubble_sort
 def bubble_sort(arr) {
@@ -35,21 +46,10 @@ bubble_sort(test_arr);
 print(test_arr);
 ```
 
-主要特性：
-- 不使用任何库从零实现词法分析，语法分析，解释执行
-- 类型包含 `int/float/bool/string` 和 `object`
-- 支持 `if/else/while/continue/break` 等基本语法
-- 支持数组类型以及 `list` 和 `map` 等高级结构
-- 支持通过 `#include` 语法导入多个脚本文件执行
-- 支持通过 `def` 语法定义函数和执行
-- 支持 `http` 和 `base64` 等常见的库（可扩展）
-
 使用 `Github Actions` 编译多版本可执行文件：
 - windows (arm/arm64/386/amd64)
 - darwin (arm64/amd64)
 - linux (arm/arm64/386/amd64)
-
-即将支持 `VSCode` 插件一键安装运行
 
 ## 快速开始
 
