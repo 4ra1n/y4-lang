@@ -119,7 +119,7 @@ jobs:
         set -x 
         cd cmd
         mkdir y4
-        ./my-gox -parallel 5 -osarch="darwin/arm64 darwin/amd64 linux/386 linux/amd64 linux/arm linux/arm64 windows/arm windows/arm64 windows/386 windows/amd64" -ldflags="-extldflags=-static -s -w" -output="y4/y4lang_{{.OS}}_{{.Arch}}_${{ env.VERSION }}"
+        ./my-gox -parallel 5 -osarch="darwin/arm64 darwin/amd64 linux/386 linux/amd64 linux/arm linux/arm64 windows/arm windows/arm64 windows/386 windows/amd64" -ldflags="-extldflags=-static -s -w" -output="y4/y4lang_${{ env.VERSION }}_{{.OS}}_{{.Arch}}"
 
     - name: create build file
       run: |
