@@ -127,7 +127,10 @@ jobs:
         cd cmd
         sudo apt-get install -y zip unzip
         sudo apt-get install -y upx
-        find y4 -type f -exec upx {} \;
+        find y4 -type f -exec sh -c '
+          upx "$1" &&
+          sha256sum "$1" > "$1_sha256.txt"
+        ' sh {} \;
         zip -r ../build.zip y4/*
         
     - name: upload
