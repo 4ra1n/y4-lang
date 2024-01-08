@@ -67,6 +67,12 @@ jobs:
         set -x
         go test ./...
 
+    - name: test examples
+      run: |
+        set -x
+        chmod u+x test.sh
+        ./test.sh
+
     - name: check gox
       run: |
         set -x
@@ -95,6 +101,12 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: '1.21'
+
+    - name: test examples
+      run: |
+        set -x
+        chmod u+x test.sh
+        ./test.sh
 
     - name: build gox
       run: |
