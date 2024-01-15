@@ -3,6 +3,8 @@ package native
 import (
 	"errors"
 	"reflect"
+
+	"github.com/4ra1n/y4-lang/log"
 )
 
 type NativeFunction struct {
@@ -43,6 +45,12 @@ func (n *NativeFunction) Invoke(args []interface{}) (interface{}, error) {
 	for i, arg := range args {
 		in[i] = reflect.ValueOf(arg)
 	}
+	defer func() {
+		err := recover()
+		if err != nil {
+			log.Errorf("invoke panic: %s", err)
+		}
+	}()
 	result := n.fn.Call(in)
 	if len(result) > 0 {
 		return result[0].Interface(), nil

@@ -100,3 +100,9 @@ sudo ./docker-build.sh
 ## VSCode 插件
 
 支持语法高亮，一键启动，正在开发中
+
+## 实用Y4脚本
+
+以下实用脚本完全由 `Y4-Lang` 编写
+
+- [检测远程WEBLOGIC是否开启了T3协议](poc/weblogic-t3.y4)

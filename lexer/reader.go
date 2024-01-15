@@ -202,6 +202,26 @@ func (l *Lexer) read0() (token.Token, error) {
 					if err != nil {
 						return nil, err
 					}
+				} else {
+					if c == 'n' {
+						buf.WriteRune('\n')
+						c, err = l.getChar()
+						if err != nil {
+							return nil, err
+						}
+					} else if c == 'r' {
+						buf.WriteRune('\r')
+						c, err = l.getChar()
+						if err != nil {
+							return nil, err
+						}
+					} else if c == 't' {
+						buf.WriteRune('\t')
+						c, err = l.getChar()
+						if err != nil {
+							return nil, err
+						}
+					}
 				}
 			} else {
 				buf.WriteRune(c)
