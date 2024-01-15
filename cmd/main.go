@@ -26,8 +26,6 @@ func main() {
 		color.DisableColor()
 	}
 
-	// PRINT LOGO
-	cli.PrintLogo()
 	ctx, cancel := context.WithCancel(context.Background())
 
 	// START
@@ -38,10 +36,14 @@ func main() {
 	for {
 		select {
 		case <-sigChan:
-			fmt.Println("ctrl+c stop")
+			if !cli.QuietFlag {
+				fmt.Println("ctrl+c stop")
+			}
 			return
 		case <-ctx.Done():
-			fmt.Println("y4-lang run finish")
+			if !cli.QuietFlag {
+				fmt.Println("y4-lang run finish")
+			}
 			return
 		}
 	}

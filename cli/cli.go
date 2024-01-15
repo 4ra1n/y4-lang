@@ -12,6 +12,7 @@ import (
 )
 
 var (
+	QuietFlag   bool
 	versionFlag bool
 	helpFlag    bool
 	envSize     int
@@ -25,10 +26,13 @@ const (
 	ErrFlag     = 0
 )
 
-func Start(cancel context.CancelFunc) {
+func Start(cancel context.CancelFunc) { // PRINT LOGO
 	parseArgs()
 	setLogLevel()
 	start(cancel)
+	if cancel != nil {
+		cancel()
+	}
 }
 
 func setLogLevel() {
@@ -60,6 +64,7 @@ func parseArgs() {
 	flag.IntVar(&envSize, "env-size", 0, "set environment size")
 	flag.IntVar(&poolSize, "pool-size", 0, "set threads pool size")
 	flag.BoolVar(&versionFlag, "version", false, "print the version")
+	flag.BoolVar(&QuietFlag, "quiet", false, "quiet mode (hide logo print)")
 	flag.BoolVar(&helpFlag, "h", false, "print help information")
 	flag.StringVar(&logLevel, "log-level", "error",
 		"specify the log level ('debug', 'info', 'warn', 'error', 'disabled')")
@@ -77,6 +82,9 @@ func parseArgs() {
 	if versionFlag {
 		color.GreenPrintf("build time: %s\n", BuildTime)
 		os.Exit(ErrFlag)
+	}
+	if !QuietFlag {
+		PrintLogo()
 	}
 }
 
