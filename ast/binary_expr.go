@@ -257,6 +257,9 @@ func computeOp(l interface{}, op string, r interface{}) (interface{}, error) {
 		if l == nil {
 			if r == nil {
 				return envir.TRUE, nil
+			} else if r == 0 {
+				// for null
+				return envir.TRUE, nil
 			} else {
 				return envir.FALSE, nil
 			}

@@ -8,6 +8,10 @@ KEY = "HELO:";
 // check weblogic t3 port
 def check_weblogic_t3(host, port) {
     connect = socket.connect(host, port);
+    if connect == null {
+        print("[-] target is closed");
+        return false;
+    }
     print("[*] start check weblogic t3");
     socket.writeStr(connect, T3_BASE);
     data = socket.readStr(connect, 1024);
