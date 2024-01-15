@@ -27,6 +27,7 @@ func AppendNatives(en envir.Environment) {
 	Append(en, nativeLengthFunction, y4Length)
 	Append(en, nativeNowFunction, y4Now)
 	Append(en, nativeSleepFunction, y4Sleep)
+	Append(en, nativeSleepMFunction, y4SleepM)
 	Append(en, nativeAppendFunction, y4Append)
 	// List
 	Append(en, nativeNewListFunction, y4NewList)

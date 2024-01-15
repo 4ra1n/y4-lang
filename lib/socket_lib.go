@@ -61,7 +61,7 @@ func connect(ip string, port int) net.Conn {
 	addr := net.JoinHostPort(ip, strconv.Itoa(port))
 	conn, err := net.DialTimeout("tcp", addr, time.Second*5)
 	if err != nil {
-		log.Errorf("socket lib error: %s", err.Error())
+		log.Warnf("socket lib error: %s", err.Error())
 		return nil
 	}
 	return conn

@@ -105,4 +105,5 @@ sudo ./docker-build.sh
 
 以下实用脚本完全由 `Y4-Lang` 编写
 
+- [多线程进行TCP全连接端口扫描](poc/port-scan.y4)
 - [检测远程WEBLOGIC是否开启了T3协议](poc/weblogic-t3.y4)
