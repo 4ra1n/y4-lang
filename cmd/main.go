@@ -15,24 +15,29 @@ func init() {
 	// VERSION
 	cli.Version = "v0.0.1"
 	// BUILD TIME
-	cli.BuildTime = "2024/01/01"
+	cli.BuildTime = "2024/01/15"
 }
 
 // Y4-Lang
 // y4-lang is a script language based on golang
 func main() {
-	// CHECK COLOR
+	// check color
 	if !color.IsSupported() {
 		color.DisableColor()
 	}
 
+	// new context
 	ctx, cancel := context.WithCancel(context.Background())
+	defer func() {
+		cancel()
+	}()
 
-	// START
+	// start
 	go cli.Start(cancel)
+
+	// wait
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
-
 	for {
 		select {
 		case <-sigChan:

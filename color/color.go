@@ -30,6 +30,7 @@ func IsSupported() bool {
 		}
 		return true
 	}
+	// enable color terminal in windows
 	return isWindowsColorSupported()
 }
 

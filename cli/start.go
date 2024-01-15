@@ -21,7 +21,7 @@ func start(cancel context.CancelFunc) {
 		return
 	}
 
-	// check extension name
+	// check extension name (allow *.y4)
 	if !strings.HasSuffix(strings.ToLower(filePath), ".y4") {
 		log.Errorf("file extension must be y4")
 		return

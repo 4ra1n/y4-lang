@@ -76,10 +76,12 @@ func parseArgs() {
 
 	flag.Parse()
 	if helpFlag {
+		PrintLogo()
 		flag.Usage()
 		os.Exit(ErrFlag)
 	}
 	if versionFlag {
+		PrintLogo()
 		color.GreenPrintf("build time: %s\n", BuildTime)
 		os.Exit(ErrFlag)
 	}
