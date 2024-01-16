@@ -1,0 +1,14 @@
+
+def myPrint() {
+    a = -10;
+    while a < 1 {
+        a = a + 1;
+        print(a);
+    }
+}
+
+def testOthers(s) {
+    if s == "test" {
+       myPrint();
+    }
+}

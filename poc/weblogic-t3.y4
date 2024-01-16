@@ -1,0 +1,37 @@
+#include "socket"
+#include "strings"
+
+// weblogic t3 header
+T3_BASE = "t3 12.1.3\nAS:2048\nHL:19\n\n";
+KEY = "HELO:";
+
+// check weblogic t3 port
+def check_weblogic_t3(host, port) {
+    connect = socket.connect(host, port);
+    if connect == null {
+        print("[-] target is closed");
+        return false;
+    }
+    print("[*] start check weblogic t3");
+    socket.writeStr(connect, T3_BASE);
+    data = socket.readStr(connect, 1024);
+    if strings.isEmpty(data) {
+        return false;
+    }
+    print("[*] receive weblogic response");
+    parts = strings.split(data, "\n");
+    if length(parts) < 1 {
+        print("[-] check weblogic t3 error");
+        return false;
+    }
+    first = parts[0];
+    if !strings.contains(first, KEY) {
+        return false;
+    }
+    version = strings.split(first, KEY)[1];
+    version = strings.split(version, ".false")[0];
+    print("[*] target weblogic version: "+version);
+    return true;
+}
+
+check_weblogic_t3("192.168.197.143", 7002);

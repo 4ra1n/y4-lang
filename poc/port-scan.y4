@@ -1,0 +1,22 @@
+#include "socket"
+
+def scan_port(host, port) {
+    connect = socket.connect(host, port);
+    if connect == null {
+        return false;
+    }
+    socket.closeConnect(connect);
+    print("[+] port " + port + " is open");
+    return true;
+}
+
+target_host = "192.168.197.143";
+start_port = 7000;
+end_port = 7020;
+print("[*] starting TCP port scan on " + target_host);
+for port = start_port; port <= end_port; port=port+1 {
+    print("[*] start scan port: " + port);
+    y4 scan_port(target_host, port);
+    sleepM(100);
+}
+print("[*] TCP port scan on " + target_host + " complete");
