@@ -11,17 +11,17 @@ type BasicEnv struct {
 	GoPool *pool.Pool
 }
 
-func NewBasicEnv() *BasicEnv {
-	return NewBasicEnvWithEnv(nil)
-}
-
 func NewBasicEnvWithEnv(e Environment) *BasicEnv {
 	en := &BasicEnv{
 		Values: base.NewMap[string, interface{}](),
 		Outer:  e,
-		GoPool: pool.NewPool(10),
+		GoPool: e.GetPool(),
 	}
 	return en
+}
+
+func (b *BasicEnv) GetPool() *pool.Pool {
+	return b.GoPool
 }
 
 func (b *BasicEnv) Put(name string, value interface{}) {

@@ -1,24 +1,34 @@
 package envir
 
-import "github.com/4ra1n/y4-lang/log"
+import (
+	"github.com/4ra1n/y4-lang/log"
+	"github.com/4ra1n/y4-lang/pool"
+)
 
-type ResizableEnv struct {
+type GlobalEnv struct {
 	Names *Symbols
 	env   *ArrayEnv
+	pool  *pool.Pool
 }
 
-func NewResizableEnv(size int, poolSize int) *ResizableEnv {
-	e := NewArrayEnv(size, poolSize, nil)
+func NewResizableEnv(size int, poolSize int) *GlobalEnv {
+	p := pool.NewPool(poolSize)
+	e := NewArrayEnv(size, p, nil)
 	n := NewSymbolsNull()
-	r := &ResizableEnv{
+	r := &GlobalEnv{
 		Names: n,
 		env:   e,
+		pool:  p,
 	}
 	log.Debugf("new env with %d - %d", size, poolSize)
 	return r
 }
 
-func (r *ResizableEnv) Put(name string, value interface{}) {
+func (r *GlobalEnv) GetPool() *pool.Pool {
+	return r.pool
+}
+
+func (r *GlobalEnv) Put(name string, value interface{}) {
 	e := r.Where(name)
 	if e == nil {
 		e = r
@@ -26,7 +36,7 @@ func (r *ResizableEnv) Put(name string, value interface{}) {
 	e.PutNew(name, value)
 }
 
-func (r *ResizableEnv) Get(name string) interface{} {
+func (r *GlobalEnv) Get(name string) interface{} {
 	i, ok := r.Names.Find(name)
 	if !ok {
 		if r.env.Outer == nil {
@@ -39,27 +49,27 @@ func (r *ResizableEnv) Get(name string) interface{} {
 	}
 }
 
-func (r *ResizableEnv) SetOuter(e Environment) {
+func (r *GlobalEnv) SetOuter(e Environment) {
 	r.env.SetOuter(e)
 }
 
-func (r *ResizableEnv) Symbols() *Symbols {
+func (r *GlobalEnv) Symbols() *Symbols {
 	return r.Names
 }
 
-func (r *ResizableEnv) PutNest(nest, index int, value interface{}) {
+func (r *GlobalEnv) PutNest(nest, index int, value interface{}) {
 	r.env.PutNest(nest, index, value)
 }
 
-func (r *ResizableEnv) GetNest(nest, index int) interface{} {
+func (r *GlobalEnv) GetNest(nest, index int) interface{} {
 	return r.env.GetNest(nest, index)
 }
 
-func (r *ResizableEnv) PutNew(name string, value interface{}) {
+func (r *GlobalEnv) PutNew(name string, value interface{}) {
 	r.Assign(r.Names.PutNew(name), value)
 }
 
-func (r *ResizableEnv) Where(name string) Environment {
+func (r *GlobalEnv) Where(name string) Environment {
 	_, ok := r.Names.Find(name)
 	if ok {
 		return r
@@ -70,7 +80,7 @@ func (r *ResizableEnv) Where(name string) Environment {
 	}
 }
 
-func (r *ResizableEnv) Assign(index int, value interface{}) {
+func (r *GlobalEnv) Assign(index int, value interface{}) {
 	if index > len(r.env.Values) {
 		newLen := len(r.env.Values) * 2
 		if index > newLen {
@@ -83,10 +93,10 @@ func (r *ResizableEnv) Assign(index int, value interface{}) {
 	r.env.Values[index] = value
 }
 
-func (r *ResizableEnv) NewJob(fn func()) bool {
+func (r *GlobalEnv) NewJob(fn func()) bool {
 	return r.env.NewJob(fn)
 }
 
-func (r *ResizableEnv) WaitJob() bool {
+func (r *GlobalEnv) WaitJob() bool {
 	return r.env.WaitJob()
 }
