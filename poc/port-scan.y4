@@ -18,7 +18,6 @@ def main() {
     for port = start_port; port <= end_port; port=port+1 {
         print("[*] start scan port: " + port);
         y4 scan_port(target_host, port);
-        sleepM(100);
     }
     print("[*] TCP port scan on " + target_host + " complete");
 }
