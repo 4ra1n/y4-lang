@@ -7,8 +7,6 @@
 ![](https://img.shields.io/github/actions/workflow/status/4ra1n/y4-lang/y4-lang.yml?branch=master)
 ![](https://img.shields.io/badge/Code%20Lines-7929-blue)
 
-[英文版本 - English Version](README-en.md)
-
 [更新日志 - Change Log](CHANGELOG.md)
 
 `Y4-Lang` 是一个基于 `Golang` 的编程语言（解释型脚本语言）
@@ -94,9 +92,11 @@ chmod u+x docker-build.sh
 sudo ./docker-build.sh
 ```
 
-## VSCode 插件
+## TODO LIST
 
-支持语法高亮，一键启动，正在开发中
+- `VSCode` 插件：支持语法高亮，一键启动，正在开发中
+- 补全文档，具体的内置函数，和库的使用
+- ...
 
 ## 实用Y4脚本
 

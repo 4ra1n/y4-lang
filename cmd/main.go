@@ -15,7 +15,7 @@ func init() {
 	// VERSION
 	cli.Version = "v0.0.1"
 	// BUILD TIME
-	cli.BuildTime = "2024/01/15"
+	cli.BuildTime = "2024/01/26"
 }
 
 // Y4-Lang
