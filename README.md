@@ -5,7 +5,7 @@
 ![](https://img.shields.io/github/v/release/4ra1n/y4-lang)
 ![](https://img.shields.io/github/downloads/4ra1n/y4-lang/total)
 ![](https://img.shields.io/github/actions/workflow/status/4ra1n/y4-lang/y4-lang.yml?branch=master)
-![](https://img.shields.io/badge/Code%20Lines-7929-blue)
+![](https://img.shields.io/badge/Code%20Lines-8865-blue)
 
 [更新日志 - Change Log](CHANGELOG.md)
 
