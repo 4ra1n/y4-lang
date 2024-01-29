@@ -14,12 +14,23 @@ import (
 func start(cancel context.CancelFunc) {
 	log.Debug("start y4-lang")
 
-	var mainFile string
+	var (
+		err      error
+		mainFile string
+	)
 	if len(filePath) > 1 {
 		// find main method
 		// if not found return error
-	} else {
+		mainFile, err = pre.SearchMain(filePath)
+		if err != nil {
+			log.Error(err)
+			return
+		}
+	} else if len(filePath) == 1 {
 		mainFile = filePath[0]
+	} else {
+		log.Error("error file input")
+		return
 	}
 
 	// check nil
