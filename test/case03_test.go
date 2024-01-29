@@ -7,21 +7,28 @@ import (
 	"github.com/4ra1n/y4-lang/core"
 	"github.com/4ra1n/y4-lang/lexer"
 	"github.com/4ra1n/y4-lang/log"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCase03(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
-def a(a,b,c,d,e){
+函数 a(a,b,c,d,e){
 	c=a+b+c+d+e;
-    return c+1;
+    返回 c+1;
 }
 c = a(1,2,3,4,5);
-print(c)
-print(c-1)
+打印(c)
+打印(c-1)
 
 `
 	log.SetLevel(log.DebugLevel)
 	r := bytes.NewReader([]byte(code))
 	i := core.NewInterpreter(lexer.NewLexer(r), nil)
 	i.Start()
+
+	result := Read()
+	assert.Contains(t, result, "16")
+	assert.Contains(t, result, "15")
 }

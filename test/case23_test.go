@@ -10,6 +10,8 @@ import (
 )
 
 func TestCase23(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
 list = newList();
 print(list);

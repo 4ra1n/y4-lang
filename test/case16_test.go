@@ -1,46 +1,39 @@
 package test
 
 import (
-	"fmt"
-	"os"
+	"bytes"
 	"testing"
+	"time"
 
 	"github.com/4ra1n/y4-lang/core"
 	"github.com/4ra1n/y4-lang/lexer"
-	"github.com/4ra1n/y4-lang/pre"
+	"github.com/4ra1n/y4-lang/log"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCase16(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
 a = "1";
-if a == "1" {
-    print("test ==");
+如果 a == "1" {
+    打印("test ==");
 }
-if a != "2" {
-	print("test !=2");
+如果 a != "2" {
+	打印("test !=2");
 }
-if a != "1" {
-	print("test !=1");
+如果 a != "1" {
+	打印("test !=1");
 }
 `
-	err := os.WriteFile("temp.y4", []byte(code), 0644)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	// preprocessor
-	ip := pre.NewIncludeProcessor("temp.y4")
-	newReader := ip.Process()
-	// new lexer
-	l := lexer.NewLexer(newReader)
-	// new interpreter
-	i := core.NewInterpreter(l, nil)
-	// start
+	log.SetLevel(log.ErrorLevel)
+	r := bytes.NewReader([]byte(code))
+	i := core.NewInterpreter(lexer.NewLexer(r), nil)
 	i.Start()
 
-	err = os.Remove("temp.y4")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	time.Sleep(1000)
+
+	result := Read()
+	assert.Contains(t, result, "test ==\n")
+	assert.Contains(t, result, "test !=2")
 }

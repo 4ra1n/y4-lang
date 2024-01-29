@@ -10,6 +10,8 @@ import (
 )
 
 func TestCase22(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
 if existFile("../token.txt") {
 	print("token exist");

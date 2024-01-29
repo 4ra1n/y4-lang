@@ -10,6 +10,8 @@ import (
 )
 
 func TestCase27(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
 for i=0;i<10;i=i+1{
 	print(i);

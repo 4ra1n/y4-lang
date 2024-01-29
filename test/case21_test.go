@@ -10,6 +10,8 @@ import (
 )
 
 func TestCase21(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
 map = newMap();
 print(map);

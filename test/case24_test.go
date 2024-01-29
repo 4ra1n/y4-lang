@@ -10,6 +10,8 @@ import (
 )
 
 func TestCase24(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
 #include "strings"
 

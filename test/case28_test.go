@@ -10,6 +10,8 @@ import (
 )
 
 func TestCase28(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
 // function binary_search_iterative
 // this function performs a binary search on a sorted array using iteration

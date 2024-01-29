@@ -1,19 +1,19 @@
 package native
 
-const nativeTypeFunction = "type"
+const nativeTypeFunction = "类型"
 
 func y4Type(v interface{}) string {
 	_, isS := v.(string)
 	if isS {
-		return "<string>"
+		return "<字符串>"
 	}
 	_, isI := v.(int)
 	if isI {
-		return "<int>"
+		return "<整数>"
 	}
 	_, isF := v.(float64)
 	if isF {
-		return "<float>"
+		return "<浮点数>"
 	}
-	return "<object>"
+	return "<对象>"
 }

@@ -10,12 +10,14 @@ import (
 )
 
 func TestCase20(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
-a = now()
-print(a);
+a = 现在()
+打印(a);
 
 b = 3;
-sleep(b);
+睡眠(b);
 `
 	log.SetLevel(log.DebugLevel)
 	r := bytes.NewReader([]byte(code))

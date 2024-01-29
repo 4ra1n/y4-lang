@@ -3,8 +3,8 @@ package native
 import "time"
 
 const (
-	nativeSleepFunction  = "sleep"
-	nativeSleepMFunction = "sleepM"
+	nativeSleepFunction  = "睡眠"
+	nativeSleepMFunction = "睡眠毫秒"
 )
 
 func y4Sleep(second int) {

@@ -8,15 +8,18 @@ import (
 	"github.com/4ra1n/y4-lang/core"
 	"github.com/4ra1n/y4-lang/lexer"
 	"github.com/4ra1n/y4-lang/pre"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCase15(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
-#include "strings"
-#include "my_script.y4"
+#引入 "字符串"
+#引入 "my_script.y4"
 
 a = "1";
-if !strings.isEmpty(a) {
+如果 !字符串.是空(a) {
     test();
 }
 `
@@ -40,4 +43,7 @@ if !strings.isEmpty(a) {
 		fmt.Println(err)
 		return
 	}
+
+	result := Read()
+	assert.Contains(t, result, "from my_script.y4 file\n")
 }

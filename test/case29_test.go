@@ -10,6 +10,8 @@ import (
 )
 
 func TestCase29(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
 #include "hex"
 

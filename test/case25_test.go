@@ -10,6 +10,8 @@ import (
 )
 
 func TestCase25(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
 #include "base64"
 

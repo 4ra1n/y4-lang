@@ -5,7 +5,7 @@ import (
 	"github.com/4ra1n/y4-lang/envir"
 )
 
-const nativeLengthFunction = "length"
+const nativeLengthFunction = "长度"
 
 func y4Length(v interface{}) int {
 	s, isS := v.(string)

@@ -10,6 +10,8 @@ import (
 )
 
 func TestCase26(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
 #include "http"
 

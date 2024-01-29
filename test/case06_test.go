@@ -7,17 +7,20 @@ import (
 	"github.com/4ra1n/y4-lang/core"
 	"github.com/4ra1n/y4-lang/lexer"
 	"github.com/4ra1n/y4-lang/log"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCase06(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
-def test(a) {
-	while a<10 {
+函数 test(a) {
+	当 a<10 {
 		a = a+1;
-		if a > 5 {
-			break;
+		如果 a > 5 {
+			跳出;
 		}
-		print(a-1);
+		打印(a-1);
 	}
 }
 
@@ -28,4 +31,10 @@ test(1);
 	r := bytes.NewReader([]byte(code))
 	i := core.NewInterpreter(lexer.NewLexer(r), nil)
 	i.Start()
+
+	result := Read()
+	assert.Contains(t, result, "1\n")
+	assert.Contains(t, result, "2\n")
+	assert.Contains(t, result, "3\n")
+	assert.Contains(t, result, "4\n")
 }

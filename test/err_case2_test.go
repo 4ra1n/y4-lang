@@ -10,6 +10,8 @@ import (
 )
 
 func TestErrCase02(t *testing.T) {
+	Finish()
+	Redirect()
 	code := `
 a="sdsdsds
 `

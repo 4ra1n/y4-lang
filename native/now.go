@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-const nativeNowFunction = "now"
+const nativeNowFunction = "现在"
 
 func y4Now() string {
 	currentTime := time.Now()
