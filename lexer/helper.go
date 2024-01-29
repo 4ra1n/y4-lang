@@ -3,7 +3,7 @@ package lexer
 func isLetter(c byte) bool {
 	return ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') || c == '.' || c == '_' ||
 		// CHINESE
-		(c > 0xe0 && c < 0xef) || (c > 0x80 && c < 0xbf)
+		(c >= 0xe0 && c <= 0xef) || (c >= 0x80 && c <= 0xbf)
 }
 
 func isDigit(c byte) bool {

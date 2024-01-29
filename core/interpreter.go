@@ -13,7 +13,7 @@ import (
 
 type Interpreter struct {
 	lexer    *lexer.Lexer
-	parser   *CoreParser
+	parser   *Parser
 	cancel   context.CancelFunc
 	envSize  int
 	poolSize int

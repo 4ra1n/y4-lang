@@ -38,26 +38,26 @@ var (
 	simple = parser.RuleWithType("primary_expr").Ast(expr)
 
 	// continue_statement : "continue"
-	continueStmt = parser.RuleWithType("continue_stmt").Sep("continue")
+	continueStmt = parser.RuleWithType("continue_stmt").Sep("继续")
 
 	// break_statement : "break"
-	breakStmt = parser.RuleWithType("break_stmt").Sep("break")
+	breakStmt = parser.RuleWithType("break_stmt").Sep("跳出")
 
 	// statement : "if" expr block [ "else" block ]
 	//             | "while" expr block | simple
 	//             | "return" factor
 	//             | "go" factor
 	statement = statement0.Or(
-		parser.RuleWithType("if_stmt").Sep("if").Ast(expr).Ast(block).Option(
-			parser.RuleNoType().Sep("else").Ast(block)),
-		parser.RuleWithType("while_stmt").Sep("while").Ast(expr).Ast(block),
-		parser.RuleWithType("for_stmt").Sep("for").
+		parser.RuleWithType("if_stmt").Sep("如果").Ast(expr).Ast(block).Option(
+			parser.RuleNoType().Sep("另外").Ast(block)),
+		parser.RuleWithType("while_stmt").Sep("当").Ast(expr).Ast(block),
+		parser.RuleWithType("for_stmt").Sep("循环").
 			Ast(expr).Sep(";"). // init
 			Ast(expr).Sep(";"). // condition
 			Ast(expr).          // iteration
 			Ast(block),
-		parser.RuleWithType("return_stmt").Sep("return").Ast(expr),
-		parser.RuleWithType("y4_stmt").Sep("y4").Ast(factor),
+		parser.RuleWithType("return_stmt").Sep("返回").Ast(expr),
+		parser.RuleWithType("y4_stmt").Sep("启动").Ast(factor),
 		continueStmt,
 		breakStmt,
 		simple,
@@ -95,15 +95,15 @@ var (
 		parser.RuleNoType().Sep(",").Ast(expr))
 )
 
-type CoreParser struct {
+type Parser struct {
 }
 
-func NewCoreParser() *CoreParser {
+func NewCoreParser() *Parser {
 	addReserved()
 	addOperators()
 	arrayRule()
 	functionRule()
-	return &CoreParser{}
+	return &Parser{}
 }
 
 func functionRule() {
@@ -147,6 +147,6 @@ func addReserved() {
 	reserved.Add(token.EOL)
 }
 
-func (c *CoreParser) Parse(l *lexer.Lexer) ast.ASTree {
+func (c *Parser) Parse(l *lexer.Lexer) ast.ASTree {
 	return program.Parse(l)
 }

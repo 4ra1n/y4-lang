@@ -24,7 +24,7 @@ func init() {
 	if err != nil {
 		return
 	}
-	closeConnectFun, err := native.NewNativeFunction(SocketLibName+SEP+"closeConnect", closeConnect)
+	closeConnectFun, err := native.NewNativeFunction(SocketLibName+SEP+"关闭", closeConnect)
 	if err != nil {
 		return
 	}
