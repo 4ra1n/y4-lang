@@ -1,53 +1,55 @@
 package lexer
 
-func isLetter(c rune) bool {
-	return ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') || c == '.' || c == '_'
+func isLetter(c byte) bool {
+	return ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') || c == '.' || c == '_' ||
+		// CHINESE
+		(c >= 0xe0 && c <= 0xef) || (c >= 0x80 && c <= 0xbf)
 }
 
-func isDigit(c rune) bool {
+func isDigit(c byte) bool {
 	return '0' <= c && c <= '9'
 }
 
-func isSpace(c rune) bool {
+func isSpace(c byte) bool {
 	return c == ' ' || c == '\t'
 }
 
-func isCR(c rune) bool {
+func isCR(c byte) bool {
 	return c == '\r'
 }
 
-func isLF(c rune) bool {
+func isLF(c byte) bool {
 	return c == '\n'
 }
 
-func isCalc(c rune) bool {
+func isCalc(c byte) bool {
 	return c == '+' || c == '-' || c == '*' || c == '/' || c == '%'
 }
 
-func isBracket(c rune) bool {
+func isBracket(c byte) bool {
 	return c == '{' || c == '}' || c == '(' || c == ')' || c == '[' || c == ']'
 }
 
-func isComma(c rune) bool {
+func isComma(c byte) bool {
 	return c == ','
 }
 
-func isPound(c rune) bool {
+func isPound(c byte) bool {
 	return c == '#'
 }
 
-func isSem(c rune) bool {
+func isSem(c byte) bool {
 	return c == ';'
 }
 
-func isQuota(c rune) bool {
+func isQuota(c byte) bool {
 	return c == '"'
 }
 
-func isSlash(c rune) bool {
+func isSlash(c byte) bool {
 	return c == '/'
 }
 
-func isDot(c rune) bool {
+func isDot(c byte) bool {
 	return c == '.'
 }

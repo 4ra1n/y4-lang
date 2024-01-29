@@ -1,25 +1,23 @@
-#include "socket"
+#引入 "骚客特"
 
-def scan_port(host, port) {
-    connect = socket.connect(host, port);
-    if connect == null {
-        return false;
+函数 扫端口(主机, 端口) {
+    连接 = 骚客特.连接(主机, 端口);
+    如果 连接 == 空的 {
+        返回 假的;
     }
-    socket.closeConnect(connect);
-    print("[+] port " + port + " is open");
-    return true;
+    骚客特.关闭(连接);
+    打印("[+] 端口 " + 端口 + " 开启");
+    返回 真的;
 }
 
-def main() {
-    target_host = "192.168.197.143";
-    start_port = 7000;
-    end_port = 7020;
-    print("[*] starting TCP port scan on " + target_host);
-    for port = start_port; port <= end_port; port=port+1 {
-        print("[*] start scan port: " + port);
-        y4 scan_port(target_host, port);
+函数 主函数() {
+    目标IP = "127.0.0.1";
+    目标开始端口 = 8070;
+    目标结束端口 = 8090;
+    打印("[*] 开始TCP端口扫描 " + 目标IP);
+    循环 端口 = 目标开始端口; 端口 <= 目标结束端口; 端口=端口+1 {
+        打印("[*] 开始扫描端口: " + 端口);
+        扫端口(目标IP, 端口);
     }
-    print("[*] TCP port scan on " + target_host + " complete");
+    打印("[*] 目标IP: " + 目标IP + " 扫描完成");
 }
-
-main();

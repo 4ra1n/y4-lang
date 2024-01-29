@@ -13,7 +13,7 @@ import (
 
 type Interpreter struct {
 	lexer    *lexer.Lexer
-	parser   *CoreParser
+	parser   *Parser
 	cancel   context.CancelFunc
 	envSize  int
 	poolSize int
@@ -95,7 +95,7 @@ func (i *Interpreter) Start() {
 	}
 
 	// check main method
-	main := en.Get("main")
+	main := en.Get("主函数")
 	if main != nil {
 		mainMethod, isOpt := main.(*ast.OptFunction)
 		if isOpt {
