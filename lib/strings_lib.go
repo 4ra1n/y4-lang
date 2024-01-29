@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	StringsLibName = "strings"
+	StringsLibName = "字符串"
 )
 
 var (
@@ -17,7 +17,7 @@ var (
 )
 
 func init() {
-	isEmptyFun, err := native.NewNativeFunction(StringsLibName+SEP+"isEmpty", isEmpty)
+	isEmptyFun, err := native.NewNativeFunction(StringsLibName+SEP+"是空", isEmpty)
 	if err != nil {
 		return
 	}

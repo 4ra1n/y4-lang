@@ -1,8 +1,9 @@
 package pre
 
 import (
-	"fmt"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestSearchMain(t *testing.T) {
@@ -10,5 +11,5 @@ func TestSearchMain(t *testing.T) {
 	if err != nil {
 		return
 	}
-	fmt.Println(file)
+	assert.Equal(t, file, "main.y4")
 }
