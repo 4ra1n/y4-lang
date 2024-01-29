@@ -54,12 +54,12 @@ print(test_arr);
 
 （1）从 `release` 页面下载你需要的二进制文件
 
-（2）使用 `-f` 参数指定 `y4` 文件（要求后缀必须是`.y4`）
+（2）使用命令 `./y4lang [--options] file-name.y4`（要求后缀必须是`.y4`）
 
 将 `print("hello wolrd");` 保存到 `test.y4` 并输入
 
 ```shell
-./y4lang -f test.y4
+./y4lang test.y4
 ```
 
 （3）可选参数
@@ -69,6 +69,34 @@ print(test_arr);
 - 使用 `--env-size` 指定默认环境大小（不建议改动）
 
 使用 `--log-level debug` 查看 `AST` 结构，用于反馈 `BUG` 或调试开发
+
+（4）支持 `main` 入口
+
+编写文件：`test.y4`
+
+```python
+a = 1;
+b = 2;
+
+def hello(str) {
+    print(str);
+}
+
+def main() {
+    hello("hello world");
+    c = a + b;
+    print("a+b=" + c);
+}
+```
+
+使用命令允许：`./y4 --quiet test.y4`
+
+输出：
+
+```text
+hello world
+a+b=3
+```
 
 ## 示例
 
