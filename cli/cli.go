@@ -21,12 +21,7 @@ var (
 	logLevel    string
 )
 
-const (
-	ErrLogLevel = -1
-	ErrFlag     = 0
-)
-
-func Start(cancel context.CancelFunc) { // PRINT LOGO
+func Start(cancel context.CancelFunc) {
 	parseArgs()
 	setLogLevel()
 	start(cancel)
@@ -55,7 +50,7 @@ func setLogLevel() {
 		break
 	default:
 		color.RedPrintln("error log level")
-		os.Exit(ErrLogLevel)
+		os.Exit(-1)
 	}
 }
 
@@ -78,12 +73,12 @@ func parseArgs() {
 	if helpFlag {
 		PrintLogo()
 		flag.Usage()
-		os.Exit(ErrFlag)
+		os.Exit(-1)
 	}
 	if versionFlag {
 		PrintLogo()
 		color.GreenPrintf("build time: %s\n", BuildTime)
-		os.Exit(ErrFlag)
+		os.Exit(-1)
 	}
 	if !QuietFlag {
 		PrintLogo()
