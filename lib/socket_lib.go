@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	SocketLibName = "socket"
+	SocketLibName = "骚客特"
 )
 
 var (
@@ -20,7 +20,7 @@ var (
 )
 
 func init() {
-	connectFun, err := native.NewNativeFunction(SocketLibName+SEP+"connect", connect)
+	connectFun, err := native.NewNativeFunction(SocketLibName+SEP+"连接", connect)
 	if err != nil {
 		return
 	}

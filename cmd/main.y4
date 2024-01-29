@@ -1,10 +1,23 @@
-a = 1;
-def hello(str) {
-    print(str);
+#引入 "骚客特"
+
+函数 扫端口(主机, 端口) {
+    目标 = 骚客特.连接(主机, 端口);
+    if connect == null {
+        return false;
+    }
+    socket.closeConnect(connect);
+    print("[+] port " + port + " is open");
+    return true;
 }
-b = 2;
-def main() {
-    hello("hello world");
-    c = a+b;
-    print("a+b=" + c);
+
+函数 主函数() {
+    target_host = "192.168.197.143";
+    start_port = 7000;
+    end_port = 7020;
+    print("[*] starting TCP port scan on " + target_host);
+    for port = start_port; port <= end_port; port=port+1 {
+        print("[*] start scan port: " + port);
+        y4 scan_port(target_host, port);
+    }
+    print("[*] TCP port scan on " + target_host + " complete");
 }

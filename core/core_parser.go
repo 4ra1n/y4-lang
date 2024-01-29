@@ -65,7 +65,7 @@ var (
 
 	// include : "#include" identifier
 	include = parser.RuleWithType("include_stmt").
-		Sep("#include").StringWithType("string_literal")
+		Sep("#引入").StringWithType("string_literal")
 
 	// program : ( include | statement | null ) ( ";" | EOL )
 	program = parser.RuleNoType().Or(
@@ -80,7 +80,7 @@ var (
 	paramList = parser.RuleNoType().Sep("(").Maybe(params).Sep(")")
 
 	// def : "def" identifier param_list block
-	def = parser.RuleWithType("def_stmt").Sep("def").
+	def = parser.RuleWithType("def_stmt").Sep("函数").
 		IdentifierNoType(reserved).Ast(paramList).Ast(block)
 
 	// args : expr { "," expr }

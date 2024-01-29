@@ -95,7 +95,7 @@ func (i *Interpreter) Start() {
 	}
 
 	// check main method
-	main := en.Get("main")
+	main := en.Get("主函数")
 	if main != nil {
 		mainMethod, isOpt := main.(*ast.OptFunction)
 		if isOpt {

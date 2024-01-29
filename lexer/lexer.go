@@ -9,12 +9,12 @@ import (
 )
 
 const (
-	EMPTY = -1
+	EMPTY = 0
 )
 
 type Lexer struct {
 	reader     io.Reader
-	lastChar   rune
+	lastChar   byte
 	lineNumber int
 	queue      *base.List[token.Token]
 }

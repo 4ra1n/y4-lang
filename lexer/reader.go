@@ -44,7 +44,7 @@ func (l *Lexer) Read() (token.Token, error) {
 	}
 }
 
-func (l *Lexer) readRune() (int32, error) {
+func (l *Lexer) readByte() (byte, error) {
 	buf := make([]byte, 1)
 	n, err := l.reader.Read(buf)
 	if err != nil {
@@ -53,12 +53,12 @@ func (l *Lexer) readRune() (int32, error) {
 	if n != 1 {
 		return 0, fmt.Errorf("no byte read")
 	}
-	return rune(buf[0]), nil
+	return buf[0], nil
 }
 
-func (l *Lexer) getChar() (rune, error) {
+func (l *Lexer) getChar() (byte, error) {
 	if l.lastChar == EMPTY {
-		val, err := l.readRune()
+		val, err := l.readByte()
 		if err != nil {
 			log.Debug(err)
 			return EMPTY, err
@@ -71,13 +71,15 @@ func (l *Lexer) getChar() (rune, error) {
 	}
 }
 
-func (l *Lexer) unGetChar(c rune) {
+func (l *Lexer) unGetChar(c byte) {
 	l.lastChar = c
 }
 
 func (l *Lexer) fillQueue(i int) (bool, error) {
 	for l.queue.Length() <= i {
 		t, err := l.read0()
+		fmt.Println(t)
+		fmt.Println(err)
 		if err != nil {
 			return false, err
 		}
@@ -111,27 +113,27 @@ func (l *Lexer) read0() (token.Token, error) {
 	if c < 0 {
 		return token.EOF, nil
 	} else if isPound(c) {
-		buf.WriteRune(c)
+		buf.WriteByte(byte(c))
 		c, err = l.getChar()
 		if err != nil {
 			return nil, err
 		}
 		for isLetter(c) {
-			buf.WriteRune(c)
+			buf.WriteByte(byte(c))
 			c, err = l.getChar()
 			if err != nil {
 				return nil, err
 			}
 		}
 	} else if isSlash(c) {
-		buf.WriteRune(c)
+		buf.WriteByte(byte(c))
 		c, err = l.getChar()
 		if err != nil {
 			return nil, err
 		}
 		if isSlash(c) {
 			for !isLF(c) {
-				buf.WriteRune(c)
+				buf.WriteByte(byte(c))
 				c, err = l.getChar()
 				if err != nil {
 					return nil, err
@@ -144,14 +146,14 @@ func (l *Lexer) read0() (token.Token, error) {
 			return token.NewIdentifierToken(l.lineNumber, "/"), nil
 		}
 	} else if isDigit(c) {
-		buf.WriteRune(c)
+		buf.WriteByte(byte(c))
 		c, err = l.getChar()
 		if err != nil {
 			return nil, err
 		}
 		dotOnce := false
 		for isDigit(c) || isDot(c) {
-			buf.WriteRune(c)
+			buf.WriteByte(byte(c))
 			c, err = l.getChar()
 			if err != nil {
 				return nil, err
@@ -161,7 +163,7 @@ func (l *Lexer) read0() (token.Token, error) {
 					return nil, errors.New("invalid number")
 				} else {
 					dotOnce = true
-					buf.WriteRune(c)
+					buf.WriteByte(byte(c))
 					c, err = l.getChar()
 					if err != nil {
 						return nil, err
@@ -172,20 +174,20 @@ func (l *Lexer) read0() (token.Token, error) {
 			}
 		}
 	} else if isLetter(c) {
-		buf.WriteRune(c)
+		buf.WriteByte(byte(c))
 		c, err = l.getChar()
 		if err != nil {
 			return nil, err
 		}
 		for isLetter(c) || isDigit(c) {
-			buf.WriteRune(c)
+			buf.WriteByte(byte(c))
 			c, err = l.getChar()
 			if err != nil {
 				return nil, err
 			}
 		}
 	} else if isQuota(c) {
-		buf.WriteRune(c)
+		buf.WriteByte(byte(c))
 		c, err = l.getChar()
 		if err != nil {
 			return nil, err
@@ -197,26 +199,26 @@ func (l *Lexer) read0() (token.Token, error) {
 					return nil, err
 				}
 				if isQuota(c) {
-					buf.WriteRune(c)
+					buf.WriteByte(byte(c))
 					c, err = l.getChar()
 					if err != nil {
 						return nil, err
 					}
 				} else {
 					if c == 'n' {
-						buf.WriteRune('\n')
+						buf.WriteByte(byte('\n'))
 						c, err = l.getChar()
 						if err != nil {
 							return nil, err
 						}
 					} else if c == 'r' {
-						buf.WriteRune('\r')
+						buf.WriteByte(byte('\r'))
 						c, err = l.getChar()
 						if err != nil {
 							return nil, err
 						}
 					} else if c == 't' {
-						buf.WriteRune('\t')
+						buf.WriteByte(byte('\t'))
 						c, err = l.getChar()
 						if err != nil {
 							return nil, err
@@ -224,7 +226,7 @@ func (l *Lexer) read0() (token.Token, error) {
 					}
 				}
 			} else {
-				buf.WriteRune(c)
+				buf.WriteByte(byte(c))
 				c, err = l.getChar()
 				if err != nil {
 					return nil, err
@@ -303,9 +305,9 @@ func (l *Lexer) read0() (token.Token, error) {
 		l.unGetChar(c)
 	}
 	temp := buf.String()
-	var firstRune rune
+	var firstRune byte
 	for _, r := range temp {
-		firstRune = r
+		firstRune = byte(r)
 		break
 	}
 	if isLetter(firstRune) || isPound(firstRune) {
@@ -337,6 +339,6 @@ func (l *Lexer) read0() (token.Token, error) {
 		temp = temp[1:]
 		return token.NewStringToken(l.lineNumber, temp), nil
 	} else {
-		return nil, errors.New("error token")
+		return token.NewIdentifierToken(l.lineNumber, temp), nil
 	}
 }
