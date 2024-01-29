@@ -4,9 +4,12 @@ import (
 	"reflect"
 	"sort"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewMap(t *testing.T) {
+	y4Assert := assert.New(t)
 	omap := NewMap[int, string]()
 	omap.Set(1, "one")
 	omap.Set(2, "two")
@@ -14,20 +17,15 @@ func TestNewMap(t *testing.T) {
 	omap.Set(6, "six")
 	omap.Set(3, "three")
 	value, exists := omap.Get(2)
-	if !exists || value != "two" {
-		t.Errorf("Get(2) = %v, %v; want 'two', true", value, exists)
-	}
+	y4Assert.True(exists)
+	y4Assert.Equal("two", value)
 	omap.Delete(2)
 	_, exists = omap.Get(2)
-	if exists {
-		t.Errorf("Expected 2 to be deleted")
-	}
+	y4Assert.False(exists)
 	keys := omap.Keys()
 	expectedKeys := []int{1, 3, 4, 6}
 	sort.Ints(keys)
-	if !reflect.DeepEqual(keys, expectedKeys) {
-		t.Errorf("Keys = %v; want %v", keys, expectedKeys)
-	}
+	y4Assert.True(reflect.DeepEqual(keys, expectedKeys))
 	for _, key := range keys {
 		value, _ := omap.Get(key)
 		t.Logf("%d: %s", key, value)
@@ -38,9 +36,7 @@ func TestNewMap(t *testing.T) {
 	})
 	sortedKeys := omap.Keys()
 	expectedSortedKeys := []int{6, 4, 3, 1}
-	if !reflect.DeepEqual(sortedKeys, expectedSortedKeys) {
-		t.Errorf("Sorted Keys = %v; want %v", sortedKeys, expectedSortedKeys)
-	}
+	y4Assert.True(reflect.DeepEqual(sortedKeys, expectedSortedKeys))
 	for _, key := range sortedKeys {
 		value, _ := omap.Get(key)
 		t.Logf("%d: %s", key, value)

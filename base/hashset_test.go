@@ -2,33 +2,26 @@ package base
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestHashSet(t *testing.T) {
+	y4Assert := assert.New(t)
 	hashSet := NewHashSet[int]()
 	hashSet.Add(1)
 	hashSet.Add(2)
 	hashSet.Add(3)
-	if hashSet.Length() != 3 {
-		t.Errorf("Expected length 3, got %d", hashSet.Length())
-	}
-	if !hashSet.Contains(1) {
-		t.Errorf("Expected to contain 1")
-	}
-	if hashSet.Contains(4) {
-		t.Errorf("Expected not to contain 4")
-	}
+	y4Assert.Equal(3, hashSet.Length())
+	y4Assert.Equal(true, hashSet.Contains(1))
+	y4Assert.Equal(false, hashSet.Contains(4))
 	hashSet.Remove(2)
-	if hashSet.Contains(2) {
-		t.Errorf("Expected not to contain 2 after removal")
-	}
-	if hashSet.Length() != 2 {
-		t.Errorf("Expected length 2 after removal, got %d", hashSet.Length())
-	}
+	y4Assert.Equal(false, hashSet.Contains(2))
+	y4Assert.Equal(2, hashSet.Length())
 	items := hashSet.Items()
-	if len(items) != 2 || !contains(items, 1) || !contains(items, 3) {
-		t.Errorf("Items method returned incorrect items: %v", items)
-	}
+	y4Assert.Equal(2, len(items))
+	y4Assert.Equal(true, contains(items, 1))
+	y4Assert.Equal(true, contains(items, 3))
 }
 
 func contains[T comparable](slice []T, element T) bool {

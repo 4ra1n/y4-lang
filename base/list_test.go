@@ -2,25 +2,28 @@ package base
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewList(t *testing.T) {
+	y4Assert := assert.New(t)
+
 	intList := NewList[int]()
 	intList.Add(1)
 	intList.Add(2)
-	if val, _ := intList.Get(0); val != 1 {
-		t.Errorf("Expected first element to be 1, got %v", val)
-	}
-	if length := intList.Length(); length != 2 {
-		t.Errorf("Expected length to be 2, got %d", length)
-	}
+	val, _ := intList.Get(0)
+	y4Assert.Equal(1, val)
+
+	length := intList.Length()
+	y4Assert.Equal(2, length)
+
 	stringList := NewList[string]()
 	stringList.Add("hello")
 	stringList.Add("world")
-	if val, _ := stringList.Get(1); val != "world" {
-		t.Errorf("Expected second element to be 'world', got '%s'", val)
-	}
-	if length := stringList.Length(); length != 2 {
-		t.Errorf("Expected length to be 2, got %d", length)
-	}
+	valStr, _ := stringList.Get(1)
+	y4Assert.Equal("world", valStr)
+
+	lengthStr := stringList.Length()
+	y4Assert.Equal(2, lengthStr)
 }
