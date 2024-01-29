@@ -1,0 +1,10 @@
+a = 1;
+def hello(str) {
+    print(str);
+}
+b = 2;
+def main() {
+    hello("hello world");
+    c = a+b;
+    print("a+b=" + c);
+}

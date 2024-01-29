@@ -92,5 +92,9 @@ func (ip *IncludePreprocessor) Process() io.Reader {
 		}
 	}
 
+	if !strings.HasSuffix(ip.fileData, "\n") {
+		ip.fileData = ip.fileData + "\n"
+	}
+
 	return bytes.NewReader([]byte(ip.fileData))
 }

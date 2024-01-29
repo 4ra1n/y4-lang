@@ -30,3 +30,12 @@ func (o *OptFunction) Body() *BlockStmt {
 func (o *OptFunction) MakeEnv() envir.Environment {
 	return envir.NewArrayEnv(o.size, o.fun.en.GetPool(), o.fun.en)
 }
+
+func EvalMain(bf *OptFunction, en envir.Environment) (interface{}, error) {
+	env := envir.NewArrayEnv(bf.size, bf.fun.en.GetPool(), en)
+	v, err := bf.Body().Eval(env)
+	if err != nil {
+		return nil, err
+	}
+	return v, nil
+}

@@ -93,6 +93,19 @@ func (i *Interpreter) Start() {
 			log.Error(err)
 		}
 	}
+
+	// check main method
+	main := en.Get("main")
+	if main != nil {
+		mainMethod, isOpt := main.(*ast.OptFunction)
+		if isOpt {
+			_, err := ast.EvalMain(mainMethod, en)
+			if err != nil {
+				log.Error(err)
+			}
+		}
+	}
+
 	ok := en.WaitJob()
 	if ok {
 		log.Info("all threads finish")
