@@ -14,21 +14,29 @@ import (
 func start(cancel context.CancelFunc) {
 	log.Debug("start y4-lang")
 
+	var mainFile string
+	if len(filePath) > 1 {
+		// find main method
+		// if not found return error
+	} else {
+		mainFile = filePath[0]
+	}
+
 	// check nil
-	filePath = strings.TrimSpace(filePath)
-	if filePath == "" {
+	mainFile = strings.TrimSpace(mainFile)
+	if mainFile == "" {
 		log.Error("file name is null")
 		return
 	}
 
 	// check extension name (allow *.y4)
-	if !strings.HasSuffix(strings.ToLower(filePath), ".y4") {
+	if !strings.HasSuffix(strings.ToLower(mainFile), ".y4") {
 		log.Errorf("file extension must be y4")
 		return
 	}
 
 	// check file exist
-	file, err := os.Open(filePath)
+	file, err := os.Open(mainFile)
 	if err != nil {
 		if os.IsNotExist(err) {
 			log.Errorf("file not exist: %s", filePath)
@@ -44,7 +52,7 @@ func start(cancel context.CancelFunc) {
 	}()
 
 	// preprocessor
-	ip := pre.NewIncludeProcessor(filePath)
+	ip := pre.NewIncludeProcessor(mainFile)
 	newReader := ip.Process()
 
 	// new lexer

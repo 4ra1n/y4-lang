@@ -12,12 +12,12 @@ import (
 )
 
 var (
+	filePath    []string
 	QuietFlag   bool
 	versionFlag bool
 	helpFlag    bool
 	envSize     int
 	poolSize    int
-	filePath    string
 	logLevel    string
 )
 
@@ -55,7 +55,6 @@ func setLogLevel() {
 }
 
 func parseArgs() {
-	flag.StringVar(&filePath, "f", "", "specify the file path")
 	flag.IntVar(&envSize, "env-size", 0, "set environment size")
 	flag.IntVar(&poolSize, "pool-size", 0, "set threads pool size")
 	flag.BoolVar(&versionFlag, "version", false, "print the version")
@@ -82,6 +81,14 @@ func parseArgs() {
 	}
 	if !QuietFlag {
 		PrintLogo()
+	}
+
+	files := flag.Args()
+	if len(files) > 0 {
+		filePath = files
+	} else {
+		color.RedPrintln("no files provided")
+		os.Exit(-1)
 	}
 }
 
