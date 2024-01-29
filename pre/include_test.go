@@ -11,10 +11,9 @@ import (
 
 func TestInclude(t *testing.T) {
 	code := `
-#include "others.y4"
-
-a = "test";
-testOthers(a);
+a=1;
+b=2;
+打印(a+b);
 `
 	err := os.WriteFile("temp.y4", []byte(code), 0644)
 	if err != nil {

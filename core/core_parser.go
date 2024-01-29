@@ -57,7 +57,6 @@ var (
 			Ast(expr).          // iteration
 			Ast(block),
 		parser.RuleWithType("return_stmt").Sep("返回").Ast(expr),
-		parser.RuleWithType("y4_stmt").Sep("启动").Ast(factor),
 		continueStmt,
 		breakStmt,
 		simple,

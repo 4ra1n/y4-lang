@@ -1,8 +1,8 @@
-def hello() {
-    print("hello");
+函数 hello() {
+    打印("hello");
 }
 
-def   main(  )  {
+函数   主函数(  )  {
 
     hello();
 }

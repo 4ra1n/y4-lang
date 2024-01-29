@@ -128,8 +128,6 @@ func makeAstList(typ string, list *base.List[ast.ASTree]) ast.ASTree {
 			return nil
 		}
 		return ast.NewArrayLiteral(newList)
-	case "y4_stmt":
-		return ast.NewGoStmt(list)
 	case "continue_stmt":
 		return ast.NewContinueStmt(list)
 	case "break_stmt":

@@ -1,14 +1,15 @@
 
-def myPrint() {
+函数 测试() {
     a = -10;
-    while a < 1 {
+    当 a < 1 {
         a = a + 1;
-        print(a);
+        打印(a);
     }
 }
 
-def testOthers(s) {
-    if s == "test" {
-       myPrint();
+函数 测试1(s) {
+    打印(s);
+    如果 s == "test" {
+       测试();
     }
 }

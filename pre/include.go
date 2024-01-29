@@ -43,7 +43,7 @@ func NewIncludeProcessor(fileName string) *IncludePreprocessor {
 }
 
 func (ip *IncludePreprocessor) Process() io.Reader {
-	re := regexp.MustCompile(`#include\s+"(.*?)"`)
+	re := regexp.MustCompile(`#引入\s+"(.*?)"`)
 	matches := re.FindAllStringSubmatch(ip.fileData, -1)
 
 	for _, match := range matches {

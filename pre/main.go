@@ -12,7 +12,7 @@ import (
 func SearchMain(files []string) (string, error) {
 	for _, file := range files {
 		data, err := os.ReadFile(file)
-		pattern := `def\s+main\s*\(\s*\)\s*{[^}]*}`
+		pattern := `函数\s+主函数\s*\(\s*\)\s*{[^}]*}`
 		re := regexp.MustCompile(pattern)
 		found := re.MatchString(string(data))
 		if found {

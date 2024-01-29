@@ -11,12 +11,12 @@ import (
 
 func TestNative(t *testing.T) {
 	code := `
-#include "others.y4"
-#include "strings"
+#引入 "others.y4"
+#引入 "strings"
 
 a = "test";
-if !strings.isEmpty(a) {
-	print("native not empty");
+如果 !strings.isEmpty(a) {
+	打印("native not empty");
 }
 testOthers(a);
 `
