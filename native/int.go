@@ -1,6 +1,6 @@
 package native
 
-const nativeIntFunction = "int"
+const nativeIntFunction = "转整数"
 
 func y4Int(i interface{}) int {
 	v, ok := i.(int)

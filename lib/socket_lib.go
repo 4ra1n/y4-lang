@@ -28,19 +28,19 @@ func init() {
 	if err != nil {
 		return
 	}
-	writeHexFun, err := native.NewNativeFunction(SocketLibName+SEP+"writeHex", writeHex)
+	writeHexFun, err := native.NewNativeFunction(SocketLibName+SEP+"写入海克斯", writeHex)
 	if err != nil {
 		return
 	}
-	readHexFun, err := native.NewNativeFunction(SocketLibName+SEP+"readHex", readHex)
+	readHexFun, err := native.NewNativeFunction(SocketLibName+SEP+"读取海克斯", readHex)
 	if err != nil {
 		return
 	}
-	writeStrFun, err := native.NewNativeFunction(SocketLibName+SEP+"writeStr", writeStr)
+	writeStrFun, err := native.NewNativeFunction(SocketLibName+SEP+"写入字符串", writeStr)
 	if err != nil {
 		return
 	}
-	readStrFun, err := native.NewNativeFunction(SocketLibName+SEP+"readStr", readStr)
+	readStrFun, err := native.NewNativeFunction(SocketLibName+SEP+"读取字符串", readStr)
 	if err != nil {
 		return
 	}
