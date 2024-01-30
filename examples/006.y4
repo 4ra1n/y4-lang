@@ -1,24 +1,24 @@
-函数 is_in_array(arr, element) {
-    循环 i=0; i<长度(arr); i=i+1 {
-        item = arr[i];
-        如果 item == element {
-            返回 true;
+函数 是否在数组中(数组, 元素) {
+    循环 甲=0; 甲<长度(数组); 甲=甲+1 {
+        临时 = 数组[甲];
+        如果 临时 == 元素 {
+            返回 真的;
         }
     }
-    返回 false;
+    返回 假的;
 }
 
-函数 unique(arr) {
-    result = [];
-    循环 i=0; i<长度(arr); i=i+1 {
-        element = arr[i];
-        如果 !is_in_array(result, element) {
-            result = append(result, element);
+函数 去重(数组) {
+    结果 = [];
+    循环 甲=0; 甲<长度(数组); 甲=甲+1 {
+        元素 = 数组[甲];
+        如果 !是否在数组中(结果, 元素) {
+            结果 = 追加(结果, 元素);
         }
     }
-    返回 result;
+    返回 结果;
 }
 
-arr = [1, 2, 2, 3, 4, 4, 5, 5, 5, 1, 2, 1111, 2222, 111, 1111];
-unique_arr = unique(arr);
-打印("unique array: " + unique_arr);
+数组 = [1, 2, 2, 3, 4, 4, 5, 5, 5, 1, 2, 1111, 2222, 111, 1111];
+去重_数组 = 去重(数组);
+打印("去重数组: " + 去重_数组);
