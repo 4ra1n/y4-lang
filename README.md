@@ -72,6 +72,10 @@
 [-50 1 5 7 8 9 10 666 888 10000]
 ```
 
+VSCode插件：https://github.com/4ra1n/y4-lang-plugin
+
+![](image/001.png)
+
 ## 示例
 
 - [冒泡排序 (Bubble Sort) 实现](examples/001.y4)
