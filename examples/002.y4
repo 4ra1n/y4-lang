@@ -1,24 +1,9 @@
-// Y4-Lang Example
-// Author: 4ra1n
-// Quick Sort
-
-// function swap
-// swaps two elements in an array.
 def swap(arr, i, j) {
     temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
 }
 
-// function partition
-// partitions the array into two parts based on a pivot
-// elements less than the pivot are moved to the left
-// elements greater are moved to the right
-// parameters:
-// arr: the array to be partitioned.
-// low: the starting index of the portion of the array to be partitioned
-// high: the ending index of the portion of the array to be partitioned
-// returns: the index of the pivot element after partitioning
 def partition(arr, low, high) {
     pivot = arr[high];
     i = low - 1;
@@ -32,9 +17,6 @@ def partition(arr, low, high) {
     return i + 1;
 }
 
-// function bubble_sort
-// quick sort algorithm
-// it recursively sorts the elements of the array by partitioning the array
 def quick_sort(arr, low, high) {
     if low < high {
         pivot = partition(arr, low, high);

@@ -326,7 +326,7 @@ func (l *Lexer) read0() (token.Token, error) {
 		} else {
 			v, err := strconv.Atoi(temp)
 			if err != nil {
-				return nil, err
+				return token.NewIdentifierToken(l.lineNumber, temp), nil
 			}
 			return token.NewNumberToken(l.lineNumber, v), nil
 		}

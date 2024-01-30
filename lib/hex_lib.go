@@ -31,10 +31,19 @@ func init() {
 }
 
 func encodeHex(s interface{}) string {
-	b, ok := s.([]byte)
-	if !ok {
-		log.Errorf("hex lib encode error")
-		return "<空的>"
+	str, isS := s.(string)
+	var (
+		b  []byte
+		ok bool
+	)
+	if isS {
+		b = []byte(str)
+	} else {
+		b, ok = s.([]byte)
+		if !ok {
+			log.Errorf("hex lib encode error")
+			return "<空的>"
+		}
 	}
 	return hex.EncodeToString(b)
 }
