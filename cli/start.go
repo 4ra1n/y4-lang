@@ -13,74 +13,81 @@ import (
 
 func start(cancel context.CancelFunc) {
 	log.Debug("start y4-lang")
-
+	// 首先是找主函数入口
 	var (
 		err      error
 		mainFile string
 	)
+	// 如果输入多个文件
 	if len(filePath) > 1 {
-		// find main method
-		// if not found return error
+		// 寻找多个文件里的主函数
+		// 没有主函数的多个文件不允许执行
 		mainFile, err = pre.SearchMain(filePath)
 		if err != nil {
 			log.Error(err)
 			return
 		}
 	} else if len(filePath) == 1 {
+		// 只输入一个文件允许直接执行
 		mainFile = filePath[0]
 	} else {
-		log.Error("error file input")
+		// 输入文件长度是0实际应该不会到达这里
+		log.Error("错误的文件输入")
 		return
 	}
 
-	// check nil
+	// 主文件名二次验证
 	mainFile = strings.TrimSpace(mainFile)
 	if mainFile == "" {
-		log.Error("file name is null")
+		log.Error("文件名是空")
 		return
 	}
 
-	// check extension name (allow *.y4)
+	// 检查后缀必须是 Y4
 	if !strings.HasSuffix(strings.ToLower(mainFile), ".y4") {
-		log.Errorf("file extension must be y4")
+		log.Errorf("文件后缀名必须是.y4")
 		return
 	}
 
-	// check file exist
+	// 检查文件存在
 	file, err := os.Open(mainFile)
 	if err != nil {
 		if os.IsNotExist(err) {
-			log.Errorf("file not exist: %s", filePath)
+			log.Errorf("文件不存在: %s", filePath)
 		} else {
-			log.Errorf("open file error: %s", err.Error())
+			log.Errorf("打开文件失败: %s", err.Error())
 		}
 		return
 	}
 	defer func() {
 		if err = file.Close(); err != nil {
-			log.Errorf("close file error: %s", err.Error())
+			log.Errorf("关闭文件错误: %s", err.Error())
 		}
 	}()
 
-	// preprocessor
+	// 预处理器
+	// 主要是处理开头的引入部分
 	ip := pre.NewIncludeProcessor(mainFile)
+	// 引入其他本地文件则替换内容
+	// 引入标准库不进行替换
 	newReader := ip.Process()
 
-	// new lexer
+	// 词法分析
 	l := lexer.NewLexer(newReader)
-	// new interpreter
+	// 创建解释器
 	i := core.NewInterpreter(l, cancel)
 
+	// 环境设置
 	if envSize != 0 {
-		log.Debugf("set env size %d", envSize)
+		log.Debugf("设置环境大小 %d", envSize)
 		i.SetEnvSize(envSize)
 	}
 
 	if poolSize != 0 {
-		log.Debugf("set pool size %d", poolSize)
+		log.Debugf("设置协程池大小 %d", poolSize)
 		i.SetPoolSize(poolSize)
 	}
 
-	// start
+	// 解释执行
 	i.Start()
 }

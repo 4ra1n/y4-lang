@@ -1,7 +1,7 @@
 package cli
 
 const (
-	Desc       = "y4-lang is a script language based on golang"
+	Desc       = "y4-lang 是基于 golang 的中文解释型脚本语言"
 	Name       = "y4-lang"
 	ProjectUrl = "https://github.com/4ra1n/y4-lang"
 

@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/4ra1n/y4-lang/ast"
+	"github.com/4ra1n/y4-lang/conf"
 	"github.com/4ra1n/y4-lang/envir"
 	"github.com/4ra1n/y4-lang/lexer"
 	"github.com/4ra1n/y4-lang/log"
@@ -38,81 +39,145 @@ func (i *Interpreter) SetPoolSize(size int) {
 }
 
 func (i *Interpreter) Start() {
+	// 根据设置先构建环境
 	env := envir.NewResizableEnv(i.envSize, i.poolSize)
+	// 包装内置库函数
 	en := native.NewNative(env).Environment()
 	for {
+		// 读取单词
 		v, err := i.lexer.Peek(0)
 		if err != nil {
-			log.Debug(err)
-			break
+			if err.Error() == "EOF" {
+				if conf.ContinueWhenEOF {
+					continue
+				}
+				if conf.BreakWhenEOF {
+					break
+				}
+			}
+			log.Error("词法分析错误: ", err)
+			if conf.ContinueWhenLexerError {
+				continue
+			}
+			if conf.BreakWhenLexerError {
+				break
+			}
 		}
 		if v == token.EOF {
-			log.Debug("exit reason: eof")
-			break
+			log.Info("退出: EOF")
+			if conf.ContinueWhenEOF {
+				continue
+			}
+			if conf.BreakWhenEOF {
+				break
+			}
 		}
 		ct, ok := v.(*token.CommentToken)
 		if ok {
-			log.Debugf("line %d ignore comment", ct.GetLineNumber())
+			log.Debugf("第 %d 行是注释", ct.GetLineNumber())
+			// 读掉注释继续执行
 			_, _ = i.lexer.Read()
 			continue
 		}
-		// core parse
+		// 语法分析
 		t := i.parser.Parse(i.lexer)
+		// 得到的 AST 不应该是空
 		if t == nil {
-			log.Debug("ast is null")
-			continue
+			log.Error("AST是空")
+			// 这个地方需要给参数
+			if conf.ContinueWhenNullAST {
+				continue
+			}
+			if conf.BreakWhenNullAST {
+				break
+			}
 		}
-		// debug info
+		// 调试用
 		s, err := t.GetString()
 		if err != nil {
 			log.Error(err)
-			continue
+			if conf.ContinueWhenDebugError {
+				continue
+			}
+			if conf.BreakWhenDebugError {
+				break
+			}
 		}
-		// check ast list
+		// 确保结果是 AST
 		astList, ok := t.(ast.ASTree)
 		if !ok {
-			log.Error("parse ast list error")
-			break
+			log.Error("解析AST错误")
+			if conf.ContinueWhenCastError {
+				continue
+			}
+			if conf.BreakWhenCastError {
+				break
+			}
 		}
-		// if null stmt skip
+		// 取 AST 第一个元素
 		tree, err := astList.Children().Get(0)
 		if err != nil {
-			log.Error("check null stmt error")
-			break
+			log.Error("检查空语句错误")
+			if conf.ContinueWhenFirstError {
+				continue
+			}
+			if conf.BreakWhenFirstError {
+				break
+			}
 		}
+		// 第一个元素是空语句则跳出
 		_, ok = tree.(*ast.NullStmt)
 		if ok {
-			log.Debug("ignore null stmt")
-			continue
+			log.Debug("忽略空语句")
+			if conf.ContinueNullStmt {
+				continue
+			}
+			if conf.BreakNullStmt {
+				break
+			}
 		}
-		log.Infof("eval: %s", s)
-		// eval ast
+		log.Infof("执行AST: %s", s)
+		// 处理符号
 		t.Lookup(en.Symbols())
+		// 执行 AST
 		_, err = t.Eval(en)
+		// 遇到错误
 		if err != nil {
 			log.Error(err)
-		}
-	}
-
-	// check main method
-	main := en.Get("主函数")
-	if main != nil {
-		mainMethod, isOpt := main.(*ast.OptFunction)
-		if isOpt {
-			_, err := ast.EvalMain(mainMethod, en)
-			if err != nil {
-				log.Error(err)
+			if conf.ContinueWhenEvalError {
+				continue
+			}
+			if conf.BreakWhenEvalError {
+				break
 			}
 		}
 	}
 
-	ok := en.WaitJob()
-	if ok {
-		log.Info("all threads finish")
+	// 检查主函数
+	if !conf.DisableMainFunc {
+		main := en.Get("主函数")
+		if main != nil {
+			mainMethod, isOpt := main.(*ast.OptFunction)
+			if isOpt {
+				_, err := ast.EvalMain(mainMethod, en)
+				if err != nil {
+					log.Error(err)
+				}
+			}
+		}
 	}
+
+	// 确保所有协程执行完毕
+	if !conf.DisableWaitForPool {
+		ok := en.WaitJob()
+		if ok {
+			log.Info("所有协程执行结束")
+		}
+	}
+
 	if i.cancel != nil {
 		i.cancel()
 	} else {
-		log.Info("test finish")
+		log.Info("测试完成")
 	}
 }
