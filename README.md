@@ -74,7 +74,7 @@
 
 VSCode插件：https://github.com/4ra1n/y4-lang-plugin
 
-![](image/vscode.png)
+![](image/0001.png)
 
 ## 示例
 
