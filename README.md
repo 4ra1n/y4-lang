@@ -72,7 +72,11 @@
 [-50 1 5 7 8 9 10 666 888 10000]
 ```
 
-VSCode插件：https://github.com/4ra1n/y4-lang-plugin
+VSCode插件：y4-lang-plugin
+
+![](image/0000.png)
+
+示例
 
 ![](image/0001.png)
 
