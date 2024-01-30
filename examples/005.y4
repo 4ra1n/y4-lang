@@ -1,45 +1,45 @@
-def max(a, b) {
-    if a > b {
-        return a;
-    } else {
-        return b;
+函数 最大(a, b) {
+    如果 a > b {
+        返回 a;
+    } 另外 {
+        返回 b;
     }
 }
 
-def make_array(rows, cols) {
-    arr = [];
-    for i=0; i<rows; i=i+1 {
-        arr = append(arr,[]);
-        for j=0; j<cols; j=j+1 {
-            arr[i] = append(arr[i], 0);
+函数 创造数组(行, 列) {
+    数组 = [];
+    循环 甲=0; 甲<行; 甲=甲+1 {
+        数组 = 追加(数组,[]);
+        循环 乙=0; 乙<列; 乙=乙+1 {
+            数组[甲] = 追加(数组[甲], 0);
         }
     }
-    return arr;
+    返回 数组;
 }
 
-def longest_common_subsequence(arr1, arr2) {
-    len1 = length(arr1);
-    len2 = length(arr2);
-    lcs_matrix = make_array(len1+1, len2+1);
-    for i=0; i<=len1; i=i+1 {
-        lcs_matrix[i][0] = 0;
+函数 最长公共子串(数组1, 数组2) {
+    一维长度 = 长度(数组1);
+    二维长度 = 长度(数组2);
+    矩阵 = 创造数组(一维长度+1, 二维长度+1);
+    循环 甲=0; 甲<=一维长度; 甲=甲+1 {
+        矩阵[甲][0] = 0;
     }
-    for j=0; j<=len2; j=j+1 {
-        lcs_matrix[0][j] = 0;
+    循环 乙=0; 乙<=二维长度; 乙=乙+1 {
+        矩阵[0][乙] = 0;
     }
-    for i=1; i<=len1; i=i+1 {
-        for j=1; j<=len2; j=j+1 {
-            if arr1[i-1] == arr2[j-1] {
-                lcs_matrix[i][j] = lcs_matrix[i-1][j-1] + 1;
-            } else {
-                lcs_matrix[i][j] = max(lcs_matrix[i-1][j], lcs_matrix[i][j-1]);
+    循环 甲=1; 甲<=一维长度; 甲=甲+1 {
+        循环 乙=1; 乙<=二维长度; 乙=乙+1 {
+            如果 数组1[甲-1] == 数组2[乙-1] {
+                矩阵[甲][乙] = 矩阵[甲-1][乙-1] + 1;
+            } 另外 {
+                矩阵[甲][乙] = 最大(矩阵[甲-1][乙], 矩阵[甲][乙-1]);
             }
         }
     }
-    return lcs_matrix[len1][len2];
+    返回 矩阵[一维长度][二维长度];
 }
 
-arr1 = [1, 2, 3, 4, 5, 5, 5, 5];
-arr2 = [2, 4, 5, 8, 10, 5, 6];
-lcs_length = longest_common_subsequence(arr1, arr2);
-print("length of longest common subsequence: " + lcs_length);
+数组1 = [1, 2, 3, 4, 5, 5, 5, 5];
+数组2 = [2, 4, 5, 8, 10, 5, 6];
+结果长度 = 最长公共子串(数组1, 数组2);
+打印("最长公共子串长度: " + 结果长度);

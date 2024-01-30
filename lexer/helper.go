@@ -53,3 +53,7 @@ func isSlash(c byte) bool {
 func isDot(c byte) bool {
 	return c == '.'
 }
+
+func isSimplifiedChinese(r rune) bool {
+	return (r >= '\u4E00' && r <= '\u9FFF') || (r >= '\u3400' && r <= '\u4DBF')
+}

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/4ra1n/y4-lang/log"
 	"github.com/4ra1n/y4-lang/token"
@@ -78,6 +79,7 @@ func (l *Lexer) unGetChar(c byte) {
 func (l *Lexer) fillQueue(i int) (bool, error) {
 	for l.queue.Length() <= i {
 		t, err := l.read0()
+		log.Debug(t)
 		if err != nil {
 			return false, err
 		}
@@ -303,19 +305,47 @@ func (l *Lexer) read0() (token.Token, error) {
 		l.unGetChar(c)
 	}
 	temp := buf.String()
-	var firstRune byte
-	for _, r := range temp {
-		firstRune = byte(r)
-		break
+
+	var (
+		firstRune  byte
+		secondRune byte
+		thirdRune  byte
+	)
+	if len(temp) == 1 {
+		firstRune = temp[0]
+		secondRune = 0
+		thirdRune = 0
+	} else if len(temp) == 2 {
+		firstRune = temp[0]
+		secondRune = temp[1]
+		thirdRune = 0
+	} else if len(temp) == 0 {
+		firstRune = 0
+		secondRune = 0
+		thirdRune = 0
+	} else {
+		firstRune = temp[0]
+		secondRune = temp[1]
+		thirdRune = temp[2]
 	}
+
+	det := []byte{firstRune, secondRune, thirdRune}
+	if utf8.Valid(det) {
+		r, _ := utf8.DecodeRune(det)
+		if isSimplifiedChinese(r) {
+			if strings.ToLower(temp) == "真的" {
+				return token.NewNumberToken(l.lineNumber, 1), nil
+			} else if strings.ToLower(temp) == "假的" {
+				return token.NewNumberToken(l.lineNumber, 0), nil
+			} else if strings.ToLower(temp) == "空的" {
+				return token.NewNumberToken(l.lineNumber, 0), nil
+			}
+			return token.NewIdentifierToken(l.lineNumber, temp), nil
+		}
+	}
+
 	if isPound(firstRune) {
 		return token.NewIdentifierToken(l.lineNumber, temp), nil
-	} else if strings.ToLower(temp) == "真的" {
-		return token.NewNumberToken(l.lineNumber, 1), nil
-	} else if strings.ToLower(temp) == "假的" {
-		return token.NewNumberToken(l.lineNumber, 0), nil
-	} else if strings.ToLower(temp) == "空的" {
-		return token.NewNumberToken(l.lineNumber, 0), nil
 	} else if isDigit(firstRune) {
 		if strings.Contains(temp, ".") {
 			v, err := strconv.ParseFloat(temp, 64)
@@ -326,7 +356,7 @@ func (l *Lexer) read0() (token.Token, error) {
 		} else {
 			v, err := strconv.Atoi(temp)
 			if err != nil {
-				return token.NewIdentifierToken(l.lineNumber, temp), nil
+				return nil, err
 			}
 			return token.NewNumberToken(l.lineNumber, v), nil
 		}

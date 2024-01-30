@@ -1,18 +1,18 @@
-def binary_search_recursive(arr, low, high, target) {
-    if high >= low {
-        mid = low + (high - low) / 2;
-        if arr[mid] == target {
-            return mid;
+函数 递归二分(数组, 低位, 高位, 目标) {
+    如果 高位 >= 低位 {
+        中位 = 低位 + (高位 - 低位) / 2;
+        如果 数组[中位] == 目标 {
+            返回 中位;
         }
-        if arr[mid] > target {
-            return binary_search_recursive(arr, low, mid - 1, target);
+        如果 数组[中位] > 目标 {
+            返回 递归二分(数组, 低位, 中位 - 1, 目标);
         }
-        return binary_search_recursive(arr, mid + 1, high, target);
+        返回 递归二分(数组, 中位 + 1, 高位, 目标);
     }
-    return -1;
+    返回 -1;
 }
 
-arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21];
-target = 13;
-index_recursive = binary_search_recursive(arr, 0, length(arr) - 1, target);
-print(index_recursive);
+数组 = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21];
+目标 = 13;
+索引 = 递归二分(数组, 0, 长度(数组) - 1, 目标);
+打印(索引);

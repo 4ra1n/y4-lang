@@ -1,29 +1,29 @@
-def make_array(rows, cols) {
+函数 make_array(rows, cols) {
     arr = [];
-    for i=0; i<rows; i=i+1 {
+    循环 i=0; i<rows; i=i+1 {
         row = [];
-        for j=0; j<cols; j=j+1 {
+        循环 j=0; j<cols; j=j+1 {
             row = append(row, false);
         }
         arr = append(arr, row);
     }
-    return arr;
+    返回 arr;
 }
 
-def is_safe(board, row, col) {
-    for i=0; i<col; i=i+1 {
-        if board[row][i] {
-            return false;
+函数 is_safe(board, row, col) {
+    循环 i=0; i<col; i=i+1 {
+        如果 board[row][i] {
+            返回 false;
         }
     }
     i = row;
     j = col;
-    while i >= 0 {
-        if j >= 0 {
-            if board[i][j] {
-                return false;
+    当 i >= 0 {
+        如果 j >= 0 {
+            如果 board[i][j] {
+                返回 false;
             }
-        } else {
+        } 另外 {
             break;
         }
         i = i - 1;
@@ -31,45 +31,45 @@ def is_safe(board, row, col) {
     }
     i = row;
     j = col;
-    while i < 8 {
-        if j >= 0 {
-            if board[i][j] {
-                return false;
+    当 i < 8 {
+        如果 j >= 0 {
+            如果 board[i][j] {
+                返回 false;
             }
-        } else {
+        } 另外 {
             break;
         }
         i = i + 1;
         j = j - 1;
     }
-    return true;
+    返回 true;
 }
 
-def solve_n_queens_util(board, col) {
-    if col >= 8 {
-        return true;
+函数 solve_n_queens_util(board, col) {
+    如果 col >= 8 {
+        返回 true;
     }
-    for i=0; i<8; i=i+1 {
-        if is_safe(board, i, col) {
+    循环 i=0; i<8; i=i+1 {
+        如果 is_safe(board, i, col) {
             board[i][col] = true;
-            if solve_n_queens_util(board, col + 1) {
-                return true;
+            如果 solve_n_queens_util(board, col + 1) {
+                返回 true;
             }
             board[i][col] = false;
         }
     }
-    return false;
+    返回 false;
 }
 
-def solve_n_queens() {
+函数 solve_n_queens() {
     board = make_array(8, 8);
-    if solve_n_queens_util(board, 0) {
-        return board;
-    } else {
-        return "no solution";
+    如果 solve_n_queens_util(board, 0) {
+        返回 board;
+    } 另外 {
+        返回 "no solution";
     }
 }
 
 solution = solve_n_queens();
-print("N-Queens Solution: ");
-print(solution);
+打印("N-Queens Solution: ");
+打印(solution);
