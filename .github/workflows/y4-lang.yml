@@ -62,9 +62,46 @@ jobs:
       with:
         go-version: '1.21.6'
 
-    - name: go test all
+    - name: go test core
       run: |
         set -x
+        cd test
+        go test ./...
+
+    - name: go test base
+      run: |
+        set -x
+        cd base
+        go test ./...
+
+    - name: go test color
+      run: |
+        set -x
+        cd color
+        go test ./...
+
+    - name: go test lexer
+      run: |
+        set -x
+        cd lexer
+        go test ./...
+
+    - name: go test log
+      run: |
+        set -x
+        cd log
+        go test ./...
+
+    - name: go test pool
+      run: |
+        set -x
+        cd pool
+        go test ./...
+
+    - name: go test pre
+      run: |
+        set -x
+        cd pre
         go test ./...
 
     - name: test examples

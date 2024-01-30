@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 
@@ -40,8 +39,6 @@ func TestInclude(t *testing.T) {
 	i := core.NewInterpreter(l, nil)
 	// start
 	i.Start()
-
-	time.Sleep(time.Second * 3)
 
 	result := test.Read()
 	assert.Contains(t, result, "-9")
