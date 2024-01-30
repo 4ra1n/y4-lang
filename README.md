@@ -66,17 +66,17 @@
 ./y4lang --quiet test.y4
 ```
 
-输出:
+输出：
 
 ```text
 [-50 1 5 7 8 9 10 666 888 10000]
 ```
 
-VSCode插件：y4-lang-plugin
+VSCode插件：（搜索 `y4-lang-plugin` 或 `y4` 关键字）
 
 ![](image/0000.png)
 
-示例
+示例：
 
 ![](image/0001.png)
 
@@ -114,5 +114,4 @@ sudo ./docker-build.sh
 - 修复BUG
 - 完善文档
 - 更多示例
-- VSCode插件
 - ...
