@@ -7,24 +7,25 @@ import (
 	"github.com/4ra1n/y4-lang/core"
 	"github.com/4ra1n/y4-lang/lexer"
 	"github.com/4ra1n/y4-lang/log"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCase22(t *testing.T) {
 	Finish()
 	Redirect()
 	code := `
-if existFile("../token.txt") {
-	print("token exist");
+如果 文件存在("../token.txt") {
+	打印("token exist");
 }
-if existFile("4ra1n.txt") {
-	print("4ra1n exist");
+如果 文件存在("4ra1n.txt") {
+	打印("4ra1n exist");
 }
 
-writeFile("case22.txt", "test");
-data = readFile("case22.txt");
-if data == "test" {
-	print("test success");
-	deleteFile("case22.txt");
+写文件("case22.txt", "test");
+data = 读文件("case22.txt");
+如果 data == "test" {
+	打印("test success");
+	删除文件("case22.txt");
 }
 
 `
@@ -32,4 +33,7 @@ if data == "test" {
 	r := bytes.NewReader([]byte(code))
 	i := core.NewInterpreter(lexer.NewLexer(r), nil)
 	i.Start()
+
+	result := Read()
+	assert.Contains(t, result, "test success\n")
 }

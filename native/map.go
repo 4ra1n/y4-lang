@@ -3,10 +3,10 @@ package native
 import "github.com/4ra1n/y4-lang/base"
 
 const (
-	nativeNewMapFunction   = "newMap"
-	nativeMapPutFunction   = "mapPut"
-	nativeMapGetFunction   = "mapGet"
-	nativeMapClearFunction = "mapClear"
+	nativeNewMapFunction   = "新建哈希表"
+	nativeMapPutFunction   = "放入哈希表"
+	nativeMapGetFunction   = "从哈希表取出"
+	nativeMapClearFunction = "清空哈希表"
 )
 
 func y4NewMap() *base.Map[string, interface{}] {
@@ -22,7 +22,7 @@ func y4MapGet(m *base.Map[string, interface{}], key string) interface{} {
 	if ok {
 		return val
 	}
-	return "<null>"
+	return "<空的>"
 }
 
 func y4MapClear(m *base.Map[string, interface{}]) {

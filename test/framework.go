@@ -4,6 +4,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"time"
 )
 
 const TestOut = "../output.a"
@@ -53,6 +54,7 @@ func Redirect() {
 }
 
 func Read() string {
+	time.Sleep(500)
 	data, err := os.ReadFile(TestOut)
 	if err != nil {
 		panic(err)

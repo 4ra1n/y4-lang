@@ -7,23 +7,28 @@ import (
 	"github.com/4ra1n/y4-lang/core"
 	"github.com/4ra1n/y4-lang/lexer"
 	"github.com/4ra1n/y4-lang/log"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCase29(t *testing.T) {
 	Finish()
 	Redirect()
 	code := `
-#include "hex"
+#引入 "海克斯"
 
 a = "ACED0005";
-c = hex.decode(a);
-b = hex.encode(c);
+c = 海克斯.解码(a);
+b = 海克斯.编码(c);
 
-print(b);
-print(c);
+打印(b);
+打印(c);
 `
 	log.SetLevel(log.DebugLevel)
 	r := bytes.NewReader([]byte(code))
 	i := core.NewInterpreter(lexer.NewLexer(r), nil)
 	i.Start()
+
+	result := Read()
+	assert.Contains(t, result, "aced0005\n")
+	assert.Contains(t, result, "[172 237 0 5]\n")
 }

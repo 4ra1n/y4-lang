@@ -7,10 +7,10 @@ import (
 )
 
 const (
-	nativeExistFileFunction  = "existFile"
-	nativeWriteFileFunction  = "writeFile"
-	nativeReadFileFunction   = "readFile"
-	nativeDeleteFileFunction = "deleteFile"
+	nativeExistFileFunction  = "文件存在"
+	nativeWriteFileFunction  = "写文件"
+	nativeReadFileFunction   = "读文件"
+	nativeDeleteFileFunction = "删除文件"
 )
 
 func y4ExistFile(fileName string) int {
@@ -31,7 +31,7 @@ func y4ExistFile(fileName string) int {
 func y4ReadFile(fileName string) string {
 	f, err := os.ReadFile(fileName)
 	if err != nil {
-		return "<null>"
+		return "<空的>"
 	}
 	return string(f)
 }

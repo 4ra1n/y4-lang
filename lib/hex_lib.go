@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	HexLibName = "hex"
+	HexLibName = "海克斯"
 )
 
 var (
@@ -17,11 +17,11 @@ var (
 )
 
 func init() {
-	encodeFun, err := native.NewNativeFunction(HexLibName+SEP+"encode", encodeHex)
+	encodeFun, err := native.NewNativeFunction(HexLibName+SEP+"编码", encodeHex)
 	if err != nil {
 		return
 	}
-	decodeFun, err := native.NewNativeFunction(HexLibName+SEP+"decode", decodeHex)
+	decodeFun, err := native.NewNativeFunction(HexLibName+SEP+"解码", decodeHex)
 	if err != nil {
 		return
 	}
@@ -34,7 +34,7 @@ func encodeHex(s interface{}) string {
 	b, ok := s.([]byte)
 	if !ok {
 		log.Errorf("hex lib encode error")
-		return "<null>"
+		return "<空的>"
 	}
 	return hex.EncodeToString(b)
 }
@@ -43,7 +43,7 @@ func decodeHex(s string) interface{} {
 	res, err := hex.DecodeString(s)
 	if err != nil {
 		log.Errorf("hex lib decode error: %s", err)
-		return "<null>"
+		return "<空的>"
 	} else {
 		return res
 	}

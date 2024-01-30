@@ -21,35 +21,35 @@ func init() {
 	if err != nil {
 		return
 	}
-	notEmptyFun, err := native.NewNativeFunction(StringsLibName+SEP+"notEmpty", notEmpty)
+	notEmptyFun, err := native.NewNativeFunction(StringsLibName+SEP+"非空", notEmpty)
 	if err != nil {
 		return
 	}
-	containsFun, err := native.NewNativeFunction(StringsLibName+SEP+"contains", contains)
+	containsFun, err := native.NewNativeFunction(StringsLibName+SEP+"包含", contains)
 	if err != nil {
 		return
 	}
-	hasPrefixFun, err := native.NewNativeFunction(StringsLibName+SEP+"hasPrefix", hasPrefix)
+	hasPrefixFun, err := native.NewNativeFunction(StringsLibName+SEP+"有前缀", hasPrefix)
 	if err != nil {
 		return
 	}
-	hasSuffixFun, err := native.NewNativeFunction(StringsLibName+SEP+"hasSuffix", hasSuffix)
+	hasSuffixFun, err := native.NewNativeFunction(StringsLibName+SEP+"有后缀", hasSuffix)
 	if err != nil {
 		return
 	}
-	toLowerFun, err := native.NewNativeFunction(StringsLibName+SEP+"toLower", toLower)
+	toLowerFun, err := native.NewNativeFunction(StringsLibName+SEP+"转小写", toLower)
 	if err != nil {
 		return
 	}
-	toUpperFun, err := native.NewNativeFunction(StringsLibName+SEP+"toUpper", toUpper)
+	toUpperFun, err := native.NewNativeFunction(StringsLibName+SEP+"转大写", toUpper)
 	if err != nil {
 		return
 	}
-	splitFun, err := native.NewNativeFunction(StringsLibName+SEP+"split", split)
+	splitFun, err := native.NewNativeFunction(StringsLibName+SEP+"分割", split)
 	if err != nil {
 		return
 	}
-	replaceFun, err := native.NewNativeFunction(StringsLibName+SEP+"replace", replace)
+	replaceFun, err := native.NewNativeFunction(StringsLibName+SEP+"替换", replace)
 	if err != nil {
 		return
 	}

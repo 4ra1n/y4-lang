@@ -13,13 +13,13 @@ func TestCase26(t *testing.T) {
 	Finish()
 	Redirect()
 	code := `
-#include "http"
+#引入 "超文本传输协议"
 
-a = http.doGet("https://www.baidu.com");
-print(a);
+a = 超文本传输协议.盖特("https://www.baidu.com");
+打印(a);
 
-h = mapGet(a, "headers");
-print(h);
+h = 从哈希表取出(a, "headers");
+打印(h);
 `
 	log.SetLevel(log.DebugLevel)
 	r := bytes.NewReader([]byte(code))

@@ -6,12 +6,12 @@ import (
 )
 
 const (
-	nativeNewListFunction     = "newList"
-	nativeListAddFunction     = "listAdd"
-	nativeListGetFunction     = "listGet"
-	nativeListRemoveFunction  = "listRemove"
-	nativeListClearFunction   = "listClear"
-	nativeListToArrayFunction = "listToArray"
+	nativeNewListFunction     = "新列表"
+	nativeListAddFunction     = "列表添加"
+	nativeListGetFunction     = "列表获取"
+	nativeListRemoveFunction  = "列表删除"
+	nativeListClearFunction   = "列表清空"
+	nativeListToArrayFunction = "列表转数组"
 )
 
 func y4NewList() *base.List[interface{}] {

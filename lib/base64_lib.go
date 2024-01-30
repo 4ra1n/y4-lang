@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	Base64LibName = "base64"
+	Base64LibName = "贝斯六四"
 )
 
 var (
@@ -17,11 +17,11 @@ var (
 )
 
 func init() {
-	encodeFun, err := native.NewNativeFunction(Base64LibName+SEP+"encode", encode)
+	encodeFun, err := native.NewNativeFunction(Base64LibName+SEP+"编码", encode)
 	if err != nil {
 		return
 	}
-	decodeFun, err := native.NewNativeFunction(Base64LibName+SEP+"decode", decode)
+	decodeFun, err := native.NewNativeFunction(Base64LibName+SEP+"解码", decode)
 	if err != nil {
 		return
 	}

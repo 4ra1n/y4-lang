@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	HttpLibName = "http"
+	HttpLibName = "超文本传输协议"
 )
 
 var (
@@ -19,11 +19,11 @@ var (
 )
 
 func init() {
-	doGetFun, err := native.NewNativeFunction(HttpLibName+SEP+"doGet", doGet)
+	doGetFun, err := native.NewNativeFunction(HttpLibName+SEP+"盖特", doGet)
 	if err != nil {
 		return
 	}
-	doPostFun, err := native.NewNativeFunction(HttpLibName+SEP+"doPost", doPost)
+	doPostFun, err := native.NewNativeFunction(HttpLibName+SEP+"抛特斯", doPost)
 	if err != nil {
 		return
 	}
