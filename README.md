@@ -9,8 +9,6 @@
 
 [更新日志 - Change Log](CHANGELOG.md)
 
-注意：v0.0.2 中文版正在开发中，已发布的 v0.0.1 版本不支持中文
-
 `Y4-Lang` 是一个基于 `Golang` 的中文编程语言（解释型脚本语言）
 
 不使用任何第三方库，仅依赖 `Golang` 标准库实现，轻量简单
@@ -102,3 +100,11 @@ sudo ./docker-build.sh
 
 - [多线程进行TCP全连接端口扫描](poc/port-scan.y4)
 - [检测远程WEBLOGIC是否开启了T3协议](poc/weblogic-t3.y4)
+
+## TODO
+
+- 修复BUG
+- 完善文档
+- 更多示例
+- VSCode插件
+- ...
