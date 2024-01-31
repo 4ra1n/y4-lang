@@ -4,10 +4,11 @@ import (
 	"bytes"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+
 	"github.com/4ra1n/y4-lang/core"
 	"github.com/4ra1n/y4-lang/lexer"
 	"github.com/4ra1n/y4-lang/log"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestCase21(t *testing.T) {

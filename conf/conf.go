@@ -22,7 +22,7 @@ var (
 	DisableWaitForPool     bool
 )
 
-func init() {
+func TestConfig() {
 	BreakWhenCastError = true
 	BreakWhenEOF = true
 	BreakWhenEvalError = true

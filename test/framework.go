@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 	"time"
+
+	"github.com/4ra1n/y4-lang/conf"
 )
 
 const TestOut = "../output.a"
@@ -50,6 +52,7 @@ func logOutput() func() {
 }
 
 func Redirect() {
+	conf.TestConfig()
 	logOutput()
 }
 
