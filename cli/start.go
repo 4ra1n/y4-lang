@@ -88,6 +88,13 @@ func start(cancel context.CancelFunc) {
 		i.SetPoolSize(poolSize)
 	}
 
+	// 检测参数
+	ok := i.Check()
+	if !ok {
+		log.Error("启动参数检查失败")
+		return
+	}
+
 	// 解释执行
 	i.Start()
 }

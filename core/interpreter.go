@@ -38,6 +38,18 @@ func (i *Interpreter) SetPoolSize(size int) {
 	i.poolSize = size
 }
 
+func (i *Interpreter) Check() bool {
+	// 这些参数必须是互斥的
+	// 同时为 true 不允许运行
+	return conf.BreakWhenEvalError != conf.ContinueWhenEvalError &&
+		conf.BreakWhenCastError != conf.ContinueWhenCastError &&
+		conf.BreakWhenLexerError != conf.ContinueWhenLexerError &&
+		conf.BreakNullStmt != conf.ContinueNullStmt &&
+		conf.BreakWhenEOF != conf.ContinueWhenEOF &&
+		conf.BreakWhenDebugError != conf.ContinueWhenDebugError &&
+		conf.BreakWhenNullAST != conf.ContinueWhenNullAST
+}
+
 func (i *Interpreter) Start() {
 	// 根据设置先构建环境
 	env := envir.NewResizableEnv(i.envSize, i.poolSize)
