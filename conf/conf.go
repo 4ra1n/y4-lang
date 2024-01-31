@@ -21,3 +21,14 @@ var (
 	DisableMainFunc        bool
 	DisableWaitForPool     bool
 )
+
+func init() {
+	BreakWhenCastError = true
+	BreakWhenEOF = true
+	BreakWhenEvalError = true
+	BreakWhenLexerError = true
+	BreakWhenNullAST = true
+	BreakWhenFirstError = true
+	ContinueWhenDebugError = true
+	ContinueNullStmt = true
+}
