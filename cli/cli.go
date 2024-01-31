@@ -104,6 +104,7 @@ func parseArgs() {
 
 	flag.BoolVar(&conf.DisableMainFunc, "dmf", false, "是否禁用主函数")
 	flag.BoolVar(&conf.DisableWaitForPool, "dwfp", false, "禁用等待协程池任务完毕")
+	flag.BoolVar(&conf.OnlyCheck, "oc", false, "是否只检查不执行")
 
 	flag.Usage = func() {
 		fmt.Println("y4-lang 帮助信息:")

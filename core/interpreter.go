@@ -152,7 +152,9 @@ func (i *Interpreter) Start() {
 		// 处理符号
 		t.Lookup(en.Symbols())
 		// 执行 AST
-		_, err = t.Eval(en)
+		if !conf.OnlyCheck {
+			_, err = t.Eval(en)
+		}
 		// 遇到错误
 		if err != nil {
 			log.Error(err)

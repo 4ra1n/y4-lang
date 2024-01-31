@@ -20,6 +20,7 @@ var (
 	BreakNullStmt          bool
 	DisableMainFunc        bool
 	DisableWaitForPool     bool
+	OnlyCheck              bool
 )
 
 func TestConfig() {
