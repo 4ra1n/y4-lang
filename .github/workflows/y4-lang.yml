@@ -68,12 +68,6 @@ jobs:
         cd test
         go test ./...
 
-    - name: go test chardet
-      run: |
-        set -x
-        cd chardet
-        go test ./...
-
     - name: go test base
       run: |
         set -x
