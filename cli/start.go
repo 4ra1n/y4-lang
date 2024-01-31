@@ -5,6 +5,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/4ra1n/y4-lang/chardet"
 	"github.com/4ra1n/y4-lang/core"
 	"github.com/4ra1n/y4-lang/lexer"
 	"github.com/4ra1n/y4-lang/log"
@@ -64,6 +65,14 @@ func start(cancel context.CancelFunc) {
 			log.Errorf("关闭文件错误: %s", err.Error())
 		}
 	}()
+
+	// 检查 UTF-8
+	// 只支持 UTF-8 编码
+	encoding, err := chardet.DetectFileEncoding(mainFile)
+	if encoding != "UTF-8" {
+		log.Errorf("输入文件必须是 UTF-8 编码 (%s)", encoding)
+		return
+	}
 
 	// 预处理器
 	// 主要是处理开头的引入部分
