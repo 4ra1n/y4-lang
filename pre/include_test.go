@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/4ra1n/y4-lang/assert"
+	"github.com/stretchr/testify/assert"
 
 	"github.com/4ra1n/y4-lang/core"
 	"github.com/4ra1n/y4-lang/lexer"

@@ -3,7 +3,7 @@ package base
 import (
 	"testing"
 
-	"github.com/4ra1n/y4-lang/assert"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewList(t *testing.T) {
