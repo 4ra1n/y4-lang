@@ -9,6 +9,7 @@ type GlobalEnv struct {
 	Names *Symbols
 	env   *ArrayEnv
 	pool  *pool.Pool
+	size  int
 }
 
 // NewResizableEnv
@@ -21,6 +22,7 @@ func NewResizableEnv(size int, poolSize int) *GlobalEnv {
 		Names: n,
 		env:   e,
 		pool:  p,
+		size:  size,
 	}
 	log.Debugf("new env with %d - %d", size, poolSize)
 	return r
@@ -101,4 +103,12 @@ func (r *GlobalEnv) NewJob(fn func()) bool {
 
 func (r *GlobalEnv) WaitJob() bool {
 	return r.env.WaitJob()
+}
+
+func (r *GlobalEnv) Clone() Environment {
+	return &GlobalEnv{
+		Names: r.Names,
+		env:   r.env,
+		pool:  r.pool,
+	}
 }

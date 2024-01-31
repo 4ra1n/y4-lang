@@ -19,4 +19,5 @@ type Environment interface {
 	GetPool() *pool.Pool
 	NewJob(fn func()) bool
 	WaitJob() bool
+	Clone() Environment
 }

@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"time"
+	"errors"
 
 	"github.com/4ra1n/y4-lang/base"
 	"github.com/4ra1n/y4-lang/envir"
@@ -41,16 +41,18 @@ func (g *GoStmt) Eval(env envir.Environment) (interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
-	// 等待调度
-	time.Sleep(100)
+	// 这里需要克隆环境
+	// 否则多线程传递的指针参数会被修改
+	newEnv := env.Clone()
 	fn := func() {
-		_, err = fun.Eval(env)
+		_, err = fun.Eval(newEnv)
 	}
-	env.NewJob(fn)
-	if err != nil {
-		return nil, err
+	ok := env.NewJob(fn)
+	if ok {
+		return nil, nil
+	} else {
+		return nil, errors.New("创建新执行线程失败")
 	}
-	return nil, nil
 }
 
 func (g *GoStmt) Lookup(sym *envir.Symbols) {

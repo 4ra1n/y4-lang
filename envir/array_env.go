@@ -85,3 +85,13 @@ func (a *ArrayEnv) WaitJob() bool {
 	a.GoPool.Wait()
 	return true
 }
+
+func (a *ArrayEnv) Clone() Environment {
+	newValues := make([]interface{}, len(a.Values))
+	copy(newValues[:], a.Values[:])
+	return &ArrayEnv{
+		Values: newValues,
+		Outer:  a.Outer,
+		GoPool: a.GoPool,
+	}
+}

@@ -81,3 +81,16 @@ func (b *BasicEnv) WaitJob() bool {
 	b.GoPool.Wait()
 	return true
 }
+
+func (b *BasicEnv) Clone() Environment {
+	newValues := base.NewMap[string, interface{}]()
+	for _, k := range b.Values.Keys() {
+		v, _ := b.Values.Get(k)
+		newValues.Set(k, v)
+	}
+	return &BasicEnv{
+		Values: newValues,
+		Outer:  b.Outer,
+		GoPool: b.GoPool,
+	}
+}
