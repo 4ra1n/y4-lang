@@ -70,42 +70,42 @@ func setLogLevel() {
 
 func parseArgs() {
 	// 基本 FLAG
-	flag.IntVar(&envSize, "env-size", 0, "设置初始环境大小(不要改)")
-	flag.IntVar(&poolSize, "pool-size", 0, "设置线程池大小(不要改)")
+	flag.IntVar(&envSize, "env-size", 0, "设置初始环境大小")
+	flag.IntVar(&poolSize, "pool-size", 0, "设置线程池大小")
 	flag.BoolVar(&versionFlag, "version", false, "打印具体版本")
 	flag.BoolVar(&QuietFlag, "quiet", false, "安静模式")
 	flag.BoolVar(&helpFlag, "h", false, "打印帮助信息")
 	flag.StringVar(&logLevel, "log-level", "error",
 		"打印日志级别 (debug, info, warn, error, disabled)")
 	// 进阶 FLAG
-	flag.BoolVar(&conf.ContinueWhenCastError, "cwce", false, "解析AST报错继续")
-	flag.BoolVar(&conf.BreakWhenCastError, "bwce", true, "解析AST报错跳出")
+	flag.BoolVar(&conf.ContinueWhenCastError, "xcwce", false, "解析AST报错继续")
+	flag.BoolVar(&conf.BreakWhenCastError, "xbwce", true, "解析AST报错跳出")
 
-	flag.BoolVar(&conf.ContinueWhenEOF, "cwe", false, "遇到EOF报错继续")
-	flag.BoolVar(&conf.BreakWhenEOF, "bwe", true, "遇到EOF报错跳出")
+	flag.BoolVar(&conf.ContinueWhenEOF, "xcwe", false, "遇到EOF报错继续")
+	flag.BoolVar(&conf.BreakWhenEOF, "xbwe", true, "遇到EOF报错跳出")
 
-	flag.BoolVar(&conf.ContinueWhenEvalError, "cwee", false, "解析执行报错继续")
-	flag.BoolVar(&conf.BreakWhenEvalError, "bwee", true, "解析执行报错跳出")
+	flag.BoolVar(&conf.ContinueWhenEvalError, "xcwee", false, "解析执行报错继续")
+	flag.BoolVar(&conf.BreakWhenEvalError, "xbwee", true, "解析执行报错跳出")
 
-	flag.BoolVar(&conf.ContinueWhenLexerError, "cwle", false, "词法分析报错继续")
-	flag.BoolVar(&conf.BreakWhenLexerError, "bwle", true, "词法分析报错跳出")
+	flag.BoolVar(&conf.ContinueWhenLexerError, "xcwle", false, "词法分析报错继续")
+	flag.BoolVar(&conf.BreakWhenLexerError, "xbwle", true, "词法分析报错跳出")
 
-	flag.BoolVar(&conf.ContinueWhenNullAST, "cwna", false, "空AST继续")
-	flag.BoolVar(&conf.BreakWhenNullAST, "bwna", true, "空AST跳出")
+	flag.BoolVar(&conf.ContinueWhenNullAST, "xcwna", false, "空AST继续")
+	flag.BoolVar(&conf.BreakWhenNullAST, "xbwna", true, "空AST跳出")
 
-	flag.BoolVar(&conf.ContinueWhenFirstError, "cwfe", false, "取第一子元素错误继续")
-	flag.BoolVar(&conf.BreakWhenFirstError, "bwfe", true, "取第一子元素错误跳出")
+	flag.BoolVar(&conf.ContinueWhenFirstError, "xcwfe", false, "取第一子元素错误继续")
+	flag.BoolVar(&conf.BreakWhenFirstError, "xbwfe", true, "取第一子元素错误跳出")
 
-	flag.BoolVar(&conf.ContinueWhenDebugError, "cwde", true, "调试信息报错继续")
-	flag.BoolVar(&conf.BreakWhenDebugError, "bwde", false, "调试信息报错跳出")
+	flag.BoolVar(&conf.ContinueWhenDebugError, "xcwde", true, "调试信息报错继续")
+	flag.BoolVar(&conf.BreakWhenDebugError, "xbwde", false, "调试信息报错跳出")
 
-	flag.BoolVar(&conf.ContinueNullStmt, "cns", true, "空语句继续")
-	flag.BoolVar(&conf.BreakNullStmt, "bns", false, "空语句跳出")
+	flag.BoolVar(&conf.ContinueNullStmt, "xcns", true, "空语句继续")
+	flag.BoolVar(&conf.BreakNullStmt, "xbns", false, "空语句跳出")
 
-	flag.BoolVar(&conf.DisableMainFunc, "dmf", false, "是否禁用主函数")
-	flag.BoolVar(&conf.DisableWaitForPool, "dwfp", false, "禁用等待协程池任务完毕")
-	flag.BoolVar(&conf.OnlyCheck, "oc", false, "是否只检查不执行")
-	flag.BoolVar(&conf.DisablePreProcess, "dpp", false, "禁用预处理")
+	flag.BoolVar(&conf.DisableMainFunc, "xdmf", false, "是否禁用主函数")
+	flag.BoolVar(&conf.DisableWaitForPool, "xdwfp", false, "禁用等待协程池任务完毕")
+	flag.BoolVar(&conf.OnlyCheck, "xoc", false, "是否只检查不执行")
+	flag.BoolVar(&conf.DisablePreProcess, "xdpp", false, "禁用预处理")
 
 	flag.Usage = func() {
 		fmt.Println("y4-lang 帮助信息:")
