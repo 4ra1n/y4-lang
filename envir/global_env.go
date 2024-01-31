@@ -11,6 +11,8 @@ type GlobalEnv struct {
 	pool  *pool.Pool
 }
 
+// NewResizableEnv
+// 全局环境的实现
 func NewResizableEnv(size int, poolSize int) *GlobalEnv {
 	p := pool.NewPool(poolSize)
 	e := NewArrayEnv(size, p, nil)

@@ -24,6 +24,9 @@ var (
 	OnlyCheck              bool
 )
 
+// TestConfig
+// 因为测试不走 flag 解析
+// 这里需要手动初始化下
 func TestConfig() {
 	BreakWhenCastError = true
 	BreakWhenEOF = true

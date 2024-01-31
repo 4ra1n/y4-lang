@@ -8,6 +8,9 @@ import (
 	"github.com/4ra1n/y4-lang/token"
 )
 
+// 核心语法规则
+// 除非你明白自己在做什么
+// 否则不要修改
 var (
 	reserved  = base.NewHashSet[string]()
 	operators = parser.NewOperators()
@@ -45,18 +48,22 @@ var (
 
 	// statement : "if" expr block [ "else" block ]
 	//             | "while" expr block | simple
+	//			   | "for" expr ; expr ; expr block
 	//             | "return" factor
-	//             | "go" factor
+	//             | "continue"
+	// 			   | "break"
+	//             | simple (expr)
 	statement = statement0.Or(
-		parser.RuleWithType("if_stmt").Sep("如果").Ast(expr).Ast(block).Option(
-			parser.RuleNoType().Sep("另外").Ast(block)),
-		parser.RuleWithType("while_stmt").Sep("当").Ast(expr).Ast(block),
-		parser.RuleWithType("for_stmt").Sep("循环").
+		parser.RuleWithType("if_stmt").Sep(ifKey).Ast(expr).Ast(block).Option(
+			parser.RuleNoType().Sep(elseKey).Ast(block)),
+		parser.RuleWithType("while_stmt").Sep(whileKey).Ast(expr).Ast(block),
+		parser.RuleWithType("for_stmt").Sep(forKey).
 			Ast(expr).Sep(";"). // init
 			Ast(expr).Sep(";"). // condition
 			Ast(expr).          // iteration
 			Ast(block),
-		parser.RuleWithType("return_stmt").Sep("返回").Ast(expr),
+		parser.RuleWithType("return_stmt").Sep(returnKey).Ast(expr),
+		parser.RuleWithType("go_stmt").Sep(goKey).Ast(factor),
 		continueStmt,
 		breakStmt,
 		simple,
@@ -64,7 +71,7 @@ var (
 
 	// include : "#include" identifier
 	include = parser.RuleWithType("include_stmt").
-		Sep("#引入").StringWithType("string_literal")
+		Sep(includeKey).StringWithType("string_literal")
 
 	// program : ( include | statement | null ) ( ";" | EOL )
 	program = parser.RuleNoType().Or(
@@ -79,7 +86,7 @@ var (
 	paramList = parser.RuleNoType().Sep("(").Maybe(params).Sep(")")
 
 	// def : "def" identifier param_list block
-	def = parser.RuleWithType("def_stmt").Sep("函数").
+	def = parser.RuleWithType("def_stmt").Sep(defKey).
 		IdentifierNoType(reserved).Ast(paramList).Ast(block)
 
 	// args : expr { "," expr }

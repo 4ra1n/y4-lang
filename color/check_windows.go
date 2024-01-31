@@ -7,6 +7,7 @@ import (
 	"unsafe"
 )
 
+// Windows 系统修改 ENABLE_VIRTUAL_TERMINAL_PROCESSING
 func isWindowsColorSupported() bool {
 	var (
 		kernel32           = syscall.NewLazyDLL("kernel32.dll")

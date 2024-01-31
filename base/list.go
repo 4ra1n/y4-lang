@@ -5,6 +5,8 @@ import (
 	"sync"
 )
 
+// List
+// 这是一个 list 的包装
 type List[T any] struct {
 	lock  sync.Mutex
 	items []T

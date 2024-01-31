@@ -4,6 +4,8 @@ import (
 	"sync"
 )
 
+// HashSet
+// 这是一个 set 结构 （去重）
 type HashSet[T comparable] struct {
 	lock sync.Mutex
 	set  map[T]struct{}

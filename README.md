@@ -5,9 +5,11 @@
 ![](https://img.shields.io/github/v/release/4ra1n/y4-lang)
 ![](https://img.shields.io/github/downloads/4ra1n/y4-lang/total)
 ![](https://img.shields.io/github/actions/workflow/status/4ra1n/y4-lang/y4-lang.yml?branch=master)
-![](https://img.shields.io/badge/Code%20Lines-8865-blue)
+![](https://img.shields.io/badge/Code%20Lines-11204-blue)
 
 [更新日志 - Change Log](CHANGELOG.md)
+
+<img alt="gitleaks badge" src="https://img.shields.io/badge/protected%20by-gitleaks-blue">
 
 `Y4-Lang` 是一个基于 `Golang` 的中文编程语言（解释型脚本语言）
 

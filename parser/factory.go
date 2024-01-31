@@ -68,6 +68,8 @@ func makeAstList(typ string, list *base.List[ast.ASTree]) ast.ASTree {
 		return ast.NewNotExpr(newList)
 	case "null_stmt":
 		return ast.NewNullStmt(list)
+	case "go_stmt":
+		return ast.NewGoStmt(list)
 	case "arguments":
 		newList, err := ignoreFirst(list)
 		if err != nil {

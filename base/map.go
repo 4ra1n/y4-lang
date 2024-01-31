@@ -5,6 +5,9 @@ import (
 	"sync"
 )
 
+// Map
+// golang 的 map 是无序的
+// 有时候其实是需要一个有序的 map 结构
 type Map[K comparable, V any] struct {
 	lock   sync.Mutex
 	keys   []K
