@@ -2,10 +2,12 @@ package cli
 
 import (
 	"context"
+	"io"
 	"os"
 	"strings"
 
 	"github.com/4ra1n/y4-lang/chardet"
+	"github.com/4ra1n/y4-lang/conf"
 	"github.com/4ra1n/y4-lang/core"
 	"github.com/4ra1n/y4-lang/lexer"
 	"github.com/4ra1n/y4-lang/log"
@@ -76,10 +78,19 @@ func start(cancel context.CancelFunc) {
 
 	// 预处理器
 	// 主要是处理开头的引入部分
-	ip := pre.NewIncludeProcessor(mainFile)
-	// 引入其他本地文件则替换内容
-	// 引入标准库不进行替换
-	newReader := ip.Process()
+	var newReader io.Reader
+	if !conf.DisablePreProcess {
+		ip := pre.NewIncludeProcessor(mainFile)
+		// 引入其他本地文件则替换内容
+		// 引入标准库不进行替换
+		newReader = ip.Process()
+	} else {
+		newReader, err = os.Open(mainFile)
+		if err != nil {
+			log.Errorf("创建文件输入流失败")
+			return
+		}
+	}
 
 	// 词法分析
 	l := lexer.NewLexer(newReader)

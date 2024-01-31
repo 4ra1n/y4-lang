@@ -22,7 +22,7 @@ func NewLeaf(t []string) *Leaf {
 func (l *Leaf) Parse(lex *lexer.Lexer, res *base.List[ast.ASTree]) error {
 	t, err := lex.Read()
 	if err != nil {
-		log.Error(err)
+		log.Info(err)
 		return nil
 	}
 	if t.IsIdentifier() {
