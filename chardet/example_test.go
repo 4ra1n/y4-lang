@@ -3,7 +3,7 @@ package chardet_test
 import (
 	"fmt"
 
-	"github.com/saintfish/chardet"
+	"github.com/4ra1n/y4-lang/chardet"
 )
 
 var (

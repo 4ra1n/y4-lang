@@ -3,7 +3,7 @@ package pre
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/4ra1n/y4-lang/assert"
 )
 
 func TestSearchMain(t *testing.T) {

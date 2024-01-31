@@ -74,6 +74,12 @@ jobs:
         cd chardet
         go test ./...
 
+    - name: go test assert
+      run: |
+        set -x
+        cd assert
+        go test ./...
+
     - name: go test base
       run: |
         set -x

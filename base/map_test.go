@@ -5,7 +5,7 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/4ra1n/y4-lang/assert"
 )
 
 func TestNewMap(t *testing.T) {
