@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 LABEL author="4ra1n"
 LABEL github="https://github.com/4ra1n"
 
-ENV Y4_VERSION v0.0.2
+ENV Y4_VERSION v0.0.3
 
 WORKDIR /app
 

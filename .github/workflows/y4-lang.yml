@@ -127,7 +127,7 @@ jobs:
     steps:
 
       - name: set version
-        run: echo "VERSION=v0.0.2" >> $GITHUB_ENV
+        run: echo "VERSION=v0.0.3" >> $GITHUB_ENV
 
       - uses: actions/checkout@v4
 

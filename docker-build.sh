@@ -2,7 +2,7 @@
 
 IMAGE_NAME="y4-lang"
 CONTAINER_NAME="y4-lang-builder"
-Y4_VERSION="v0.0.2"
+Y4_VERSION="v0.0.3"
 
 EXISTING_IMAGE=$(docker images -q $IMAGE_NAME:$Y4_VERSION)
 if [ ! -z "$EXISTING_IMAGE" ]; then

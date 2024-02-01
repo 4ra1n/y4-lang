@@ -14,9 +14,9 @@ import (
 // 全局的版本号和构建时间
 func init() {
 	// VERSION
-	cli.Version = "v0.0.2"
+	cli.Version = "v0.0.3"
 	// BUILD TIME
-	cli.BuildTime = "2024/01/30"
+	cli.BuildTime = "2024/02/01"
 }
 
 // Y4-Lang
