@@ -7,7 +7,6 @@ import (
 type Function struct {
 	parameters *ParameterList
 	body       *BlockStmt
-	return0    interface{}
 	en         envir.Environment
 }
 
@@ -17,18 +16,6 @@ func (f *Function) Body() *BlockStmt {
 
 func (f *Function) Parameters() *ParameterList {
 	return f.parameters
-}
-
-func (f *Function) Return0() interface{} {
-	return f.return0
-}
-
-func (f *Function) SetReturn0(r interface{}) {
-	f.return0 = r
-}
-
-func (f *Function) MakeEnv() envir.Environment {
-	return envir.NewBasicEnvWithEnv(f.en)
 }
 
 func NewFunction(parameters *ParameterList,

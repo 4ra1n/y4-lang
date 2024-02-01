@@ -12,10 +12,12 @@ type GlobalEnv struct {
 	size  int
 }
 
-// NewResizableEnv
+// NewGlobalEnv
 // 全局环境的实现
-func NewResizableEnv(size int, poolSize int) *GlobalEnv {
+func NewGlobalEnv(size int, poolSize int) *GlobalEnv {
 	p := pool.NewPool(poolSize)
+	// 全局环境本身不维护环境
+	// 而是使用一个 ArrayEnv 环境（Assign 时扩容）
 	e := NewArrayEnv(size, p, nil)
 	n := NewSymbolsNull()
 	r := &GlobalEnv{
@@ -24,7 +26,7 @@ func NewResizableEnv(size int, poolSize int) *GlobalEnv {
 		pool:  p,
 		size:  size,
 	}
-	log.Debugf("new env with %d - %d", size, poolSize)
+	log.Debugf("创建新环境大小 %d 协程池大小 %d", size, poolSize)
 	return r
 }
 
@@ -85,6 +87,7 @@ func (r *GlobalEnv) Where(name string) Environment {
 }
 
 func (r *GlobalEnv) Assign(index int, value interface{}) {
+	// 按需扩容
 	if index > len(r.env.Values) {
 		newLen := len(r.env.Values) * 2
 		if index > newLen {

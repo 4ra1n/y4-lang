@@ -52,7 +52,7 @@ func (i *Interpreter) Check() bool {
 
 func (i *Interpreter) Start() {
 	// 根据设置先构建环境
-	env := envir.NewResizableEnv(i.envSize, i.poolSize)
+	env := envir.NewGlobalEnv(i.envSize, i.poolSize)
 	// 包装内置库函数
 	en := native.NewNative(env).Environment()
 	for {
@@ -169,7 +169,7 @@ func (i *Interpreter) Start() {
 
 	// 检查主函数
 	if !conf.DisableMainFunc {
-		main := en.Get("主函数")
+		main := en.Get(mainMethodKey)
 		if main != nil {
 			mainMethod, isOpt := main.(*ast.OptFunction)
 			if isOpt {
