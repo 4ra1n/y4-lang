@@ -84,14 +84,14 @@ VSCode插件：（搜索 `y4-lang-plugin` 或 `y4` 关键字）
 
 ## 示例
 
-- [冒泡排序 (Bubble Sort) 实现](examples/001.y4)
-- [快速排序 (Quick Sort) 实现](examples/002.y4)
-- [递归实现的二分查找](examples/003.y4)
-- [非递归实现的二分查找](examples/004.y4)
-- [动态规划解决最长公共子序列 (LCS) 问题](examples/005.y4)
-- [数组去重问题的实现](examples/006.y4)
-- [接雨水问题的实现](examples/007.y4)
-- [回溯算法解决八皇后问题](examples/008.y4)
+- [冒泡排序 (Bubble Sort) 实现](y4-examples/001.y4)
+- [快速排序 (Quick Sort) 实现](y4-examples/002.y4)
+- [递归实现的二分查找](y4-examples/003.y4)
+- [非递归实现的二分查找](y4-examples/004.y4)
+- [动态规划解决最长公共子序列 (LCS) 问题](y4-examples/005.y4)
+- [数组去重问题的实现](y4-examples/006.y4)
+- [接雨水问题的实现](y4-examples/007.y4)
+- [回溯算法解决八皇后问题](y4-examples/008.y4)
 
 ## Docker
 
@@ -108,8 +108,8 @@ sudo ./docker-build.sh
 
 以下实用脚本完全由 `Y4-Lang` 编写
 
-- [多线程进行TCP全连接端口扫描](poc/port-scan.y4)
-- [检测远程WEBLOGIC是否开启了T3协议](poc/weblogic-t3.y4)
+- [多线程进行TCP全连接端口扫描](y4-scripts/port-scan.y4)
+- [检测远程WEBLOGIC是否开启了T3协议](y4-scripts/weblogic-t3.y4)
 
 ## TODO
 

@@ -101,7 +101,7 @@ jobs:
           cd pre
           go test ./...
 
-      - name: test examples
+      - name: test y4-examples
         run: |
           set -x
           chmod u+x test.sh
@@ -136,7 +136,7 @@ jobs:
         with:
           go-version: '1.21.6'
 
-      - name: test examples
+      - name: test y4-examples
         run: |
           set -x
           chmod u+x test.sh

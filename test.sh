@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for file in examples/*.y4; do
+for file in y4-examples/*.y4; do
     echo "running script for $file"
     go run cmd/main.go -quiet $file
     if [ $? -ne 0 ]; then
